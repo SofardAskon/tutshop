@@ -13,11 +13,7 @@
                 </div>
             </div>
         </div>
-        <div
-            class="row"
-            v-for="(download, index) in downloads"
-            :key="download.id"
-        >
+        <div class="row" v-for="(download, index) in downloads">
             <input type="hidden" name="downalods[]" v-model="download.id" />
             <div class="col-sm-6">
                 <div class="form-group">
@@ -80,9 +76,7 @@ export default {
             fileCurrent: "",
         };
     },
-    props: ["files"],
     mounted() {
-        this.downloads = this.files;
         console.log("component mounted");
     },
     method: {

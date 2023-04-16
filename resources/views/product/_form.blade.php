@@ -39,5 +39,7 @@
         @include('product._categories')
     </select>
 </div>
+{{-- upload-file-component --}}
+</div>
 
-<upload-file-component></upload-file-component>
+<upload-file-component :files={{ $product->downloads ?? '[]' }}></upload-file-component>

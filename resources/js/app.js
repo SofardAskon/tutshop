@@ -1,13 +1,7 @@
 import "./bootstrap";
-// import Vue from "vue";
+import { createApp } from "vue";
+import UploadFileComponent from "./components/admin/UploadFileComponent.vue";
 
-import Vue from "vue";
-
-Vue.component(
-    "upload-file-component",
-    require("./components/admin/UploadFileComponent")
-);
-
-const app = new Vue({
-    el: "#app",
-});
+const app = createApp({});
+app.component("upload-file-component", UploadFileComponent);
+app.mount("#app");

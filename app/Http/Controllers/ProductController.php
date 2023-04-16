@@ -35,10 +35,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create($request->except('categories'));
+        $product = Product::create($request->except('categories', 'downloads', 'files'));
 
         if ($request->has('categories')) {
             $product->categories()->attach($request->input('categories'));
+        }
+
+        if ($request->has('categories')) {
+            $product->downloads()->attach($request->downalods);
         }
 
         return redirect()->route('product.index');
@@ -69,7 +73,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->except('categories'));
+        $product->update($request->except('categories', 'downalods', 'files'));
 
         $product->categories()->detach();
 
