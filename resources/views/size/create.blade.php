@@ -7,15 +7,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Товар</h1>
+                        <h1 class="m-0">Размер</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <form action="{{ route('product.store') }}" method="post">
+                            <form action="{{ route('size.store') }}" method="post">
                                 @csrf
-                                @include('product._form')
+                                @include('size._form')
                             </form>
                         </div>
                     </div>

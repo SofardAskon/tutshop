@@ -1,5 +1,5 @@
 <template>
-    <div class="contaoner">
+    <div class="container 12312312">
         <div class="row" v-if="fileProgress > 0">
             <div class="col-sm-12 text-center mb-4">
                 <div class="progress" style="height: 40px">
@@ -18,12 +18,12 @@
             v-for="(download, index) in downloads"
             :key="download.id"
         >
-            <input type="hidden" name="downalods[]" v-model="download.id" />
+            <input type="hidden" name="downloads[]" v-model="download.id" />
             <div class="col-sm-6">
                 <div class="form-group">
                     <input
                         type="text"
-                        class="form-controller"
+                        class="form-control"
                         placeholder="Подписать для файла"
                         v-model="download.title"
                     />
@@ -31,11 +31,11 @@
             </div>
             <div class="col-sm-6">
                 <div class="input-group">
-                    <template v-if="downalod.is_new">
+                    <template v-if="download.is_new">
                         <div class="custom-file">
                             <input
                                 type="file"
-                                class="custom-file-input"
+                                class="custom-file-input form-control"
                                 id="customFile"
                                 @change="fileInputChange(download)"
                             />
@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <button type="button" class="btn btn-primary" @click="addFile">
-                    Добавить
+                    Добавить изображения/видео
                 </button>
             </div>
         </div>
@@ -85,8 +85,9 @@ export default {
         this.downloads = this.files;
         console.log("component mounted");
     },
-    method: {
+    methods: {
         addFile() {
+            console.log(1);
             this.downloads.push({ id: 0, title: "", file: [], is_new: true });
         },
         deleteFile(index) {
@@ -106,6 +107,10 @@ export default {
             download.file = event.target.files[0];
         },
         async uploadFile(download) {
+            if (!download.hasOwnProperty("is_new")) {
+                return;
+            }
+
             let form = new FormData();
             form.append("file", download.file);
             form.append("title", download.title);
@@ -124,12 +129,12 @@ export default {
                     download.id = response.data;
                     download.is_new = false;
                 })
-                .cath((error) => {
+                .catch((error) => {
                     console.log(error);
                 });
 
-            tjis.fileProgress = 0;
-            tjis.fileCurrent = "";
+            this.fileProgress = 0;
+            this.fileCurrent = "";
         },
     },
 };

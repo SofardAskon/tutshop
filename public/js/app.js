@@ -17437,11 +17437,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fileCurrent: ""
     };
   },
+  props: ["files"],
   mounted: function mounted() {
+    this.downloads = this.files;
     console.log("component mounted");
   },
-  method: {
+  methods: {
     addFile: function addFile() {
+      console.log(1);
       this.downloads.push({
         id: 0,
         title: "",
@@ -17471,10 +17474,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              if (download.hasOwnProperty("is_new")) {
+                _context.next = 2;
+                break;
+              }
+              return _context.abrupt("return");
+            case 2:
               form = new FormData();
               form.append("file", download.file);
               form.append("title", download.title);
-              _context.next = 5;
+              _context.next = 7;
               return axios.post("/admin/download", form, {
                 onUploadProgress: function onUploadProgress(itemUpload) {
                   _this2.fileProgress = Math.round(itemUpload.loaded / itemUpload.title * 100);
@@ -17483,13 +17492,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               }).then(function (response) {
                 download.id = response.data;
                 download.is_new = false;
-              }).cath(function (error) {
+              })["catch"](function (error) {
                 console.log(error);
               });
-            case 5:
-              tjis.fileProgress = 0;
-              tjis.fileCurrent = "";
             case 7:
+              _this2.fileProgress = 0;
+              _this2.fileCurrent = "";
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -17515,7 +17524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "contaoner"
+  "class": "container 12312312"
 };
 var _hoisted_2 = {
   key: 0,
@@ -17581,45 +17590,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: download.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "hidden",
-      name: "downalods[]",
+      name: "downloads[]",
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return download.id = $event;
       }
     }, null, 8 /* PROPS */, _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, download.id]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "text",
-      "class": "form-controller",
+      "class": "form-control",
       placeholder: "Подписать для файла",
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return download.title = $event;
       }
-    }, null, 8 /* PROPS */, _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, download.title]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_ctx.downalod.is_new ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    }, null, 8 /* PROPS */, _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, download.title]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [download.is_new ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: 0
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "file",
-      "class": "custom-file-input",
+      "class": "custom-file-input form-control",
       id: "customFile",
       onChange: function onChange($event) {
-        return _ctx.fileInputChange(download);
+        return $options.fileInputChange(download);
       }
     }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_12), _hoisted_13]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       type: "button",
       "class": "btn btn-outline-secondary",
       onClick: function onClick($event) {
-        return _ctx.uploadFile(download);
+        return $options.uploadFile(download);
       }
     }, " Загузить ", 8 /* PROPS */, _hoisted_15)])], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": "input-group-prepend",
       onClick: function onClick($event) {
-        return _ctx.deleteFile(index);
+        return $options.deleteFile(index);
       }
     }, _hoisted_18, 8 /* PROPS */, _hoisted_16)])])]);
   }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-primary",
     onClick: _cache[0] || (_cache[0] = function () {
-      return _ctx.addFile && _ctx.addFile.apply(_ctx, arguments);
+      return $options.addFile && $options.addFile.apply($options, arguments);
     })
-  }, " Добавить ")])])]);
+  }, " Добавить изображения/видео ")])])]);
 }
 
 /***/ }),

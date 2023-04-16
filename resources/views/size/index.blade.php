@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">Размеры</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
@@ -28,11 +28,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($sizes as $size)
                                     <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td> <a href="{{ route('product.edit', $product) }}">Редактировать</a> </td>
+                                        <td class="dtr-control sorting_1" tabindex="0">{{ $size->id }}</td>
+                                        <td>{{ $size->name }}</td>
+                                        <td> <a href="{{ route('size.edit', $size) }}">Редактировать</a> </td>
                                     </tr>
                                 @endforeach
                             </tbody>

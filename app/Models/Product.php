@@ -16,6 +16,16 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
+
     public function downloads()
     {
         return $this->morphToMany(Download::class, 'downloadable');

@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">ЦВета</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
@@ -23,16 +23,19 @@
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Browser: activate to sort column ascending">Названия</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                        colspan="1" aria-label="Browser: activate to sort column ascending">Цвет</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                         Действия</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($colors as $color)
                                     <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td> <a href="{{ route('product.edit', $product) }}">Редактировать</a> </td>
+                                        <td class="dtr-control sorting_1" tabindex="0">{{ $color->id }}</td>
+                                        <td>{{ $color->name }}</td>
+                                        <td style="background-color: {{ $color->hex_code }};"></td>
+                                        <td> <a href="{{ route('color.edit', $color) }}">Редактировать</a> </td>
                                     </tr>
                                 @endforeach
                             </tbody>

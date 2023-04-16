@@ -24,14 +24,22 @@
         value="{{ $product->old_price ?? '' }}" placeholder="Старая цена">
 </div>
 <div class="form-group">
-    <label>Изображения</label>
-    <input type="text" class="form-control form-control-border" name="image" value="{{ $product->image ?? '' }}"
-        placeholder="Изображения">
+    <label>Цвета</label>
+    <div class="select2-purple">
+        <select class="select2" name="colors[]" multiple="multiple" data-placeholder="Выберите цвет"
+            data-dropdown-css-class="select2-purple" style="width: 100%;">
+            @include('product._colors')
+        </select>
+    </div>
 </div>
 <div class="form-group">
-    <label>Галерея</label>
-    <input type="text" class="form-control form-control-border" name="gallery" value="{{ $product->gallery ?? '' }}"
-        placeholder="Галерея">
+    <label>Размеры</label>
+    <div class="select2-purple">
+        <select class="select2" name="sizes[]" multiple="multiple" data-placeholder="Выберите размер"
+            data-dropdown-css-class="select2-purple" style="width: 100%;">
+            @include('product._sizes')
+        </select>
+    </div>
 </div>
 <div class="form-group">
     <label>Родительская категория</label>
@@ -40,6 +48,6 @@
     </select>
 </div>
 {{-- upload-file-component --}}
-</div>
-
 <upload-file-component :files={{ $product->downloads ?? '[]' }}></upload-file-component>
+
+<button type="submit" class="btn btn-primary">Сохранить</button>

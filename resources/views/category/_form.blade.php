@@ -10,3 +10,4 @@
         @include('category._categories')
     </select>
 </div>
+<button type="submit" class="btn btn-primary">Сохранить</button>

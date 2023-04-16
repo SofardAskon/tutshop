@@ -12,7 +12,9 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        return view('size.index', [
+            'sizes' => Size::get()
+        ]);
     }
 
     /**
@@ -20,7 +22,9 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('size.create', [
+            'size' => [],
+        ]);
     }
 
     /**
@@ -28,37 +32,42 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Size::create($request->all());
+
+        return redirect()->route('size.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Size $size)
+    public function show(size $size)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Size $size)
+    public function edit(size $size)
     {
-        //
+        return view('size.edit', [
+            'size' => $size
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Size $size)
+    public function update(Request $request, size $size)
     {
-        //
+        $size->update($request->all());
+
+        return redirect()->route('size.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Size $size)
+    public function destroy(size $size)
     {
         //
     }

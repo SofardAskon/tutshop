@@ -12,7 +12,9 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        return view('color.index', [
+            'colors' => Color::get()
+        ]);
     }
 
     /**
@@ -20,7 +22,9 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('color.create', [
+            'color' => [],
+        ]);
     }
 
     /**
@@ -28,7 +32,9 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Color::create($request->all());
+
+        return redirect()->route('color.index');
     }
 
     /**
@@ -36,7 +42,6 @@ class ColorController extends Controller
      */
     public function show(Color $color)
     {
-        //
     }
 
     /**
@@ -44,7 +49,9 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        //
+        return view('color.edit', [
+            'color' => $color
+        ]);
     }
 
     /**
@@ -52,7 +59,9 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $color->update($request->all());
+
+        return redirect()->route('color.index');
     }
 
     /**

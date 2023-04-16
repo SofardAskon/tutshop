@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">Товар</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
@@ -17,8 +17,14 @@
                                 @method('PUT')
                                 @csrf
                                 @include('product._form')
-                                <button type="submit">Сохранить</button>
                             </form>
+                            <div class="row mt-3">
+
+                                @foreach ($product->downloads as $downloadItem)
+                                    <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
+                                        width="150" height="150" style="object-fit:cover;">
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

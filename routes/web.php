@@ -24,5 +24,7 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('product', App\Http\Controllers\ProductController::class);
+    Route::resource('color', App\Http\Controllers\ColorController::class);
+    Route::resource('size', App\Http\Controllers\SizeController::class);
     Route::resource('download', App\Http\Controllers\Admin\DownloadController::class)->only('store', 'update', 'destroy');
 });

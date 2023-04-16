@@ -7,15 +7,16 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Товар</h1>
+                        <h1 class="m-0">Цвет</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <form action="{{ route('product.store') }}" method="post">
+                            <form action="{{ route('color.update', $color) }}" method="post">
+                                @method('PUT')
                                 @csrf
-                                @include('product._form')
+                                @include('color._form')
                             </form>
                         </div>
                     </div>

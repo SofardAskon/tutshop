@@ -17,7 +17,6 @@
                                 @method('PUT')
                                 @csrf
                                 @include('category._form')
-                                <button type="submit">Сохранить</button>
                             </form>
                         </div>
                     </div>
