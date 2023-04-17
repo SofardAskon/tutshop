@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index', [
+        return view('admin.product.index', [
             'products' => Product::get()
         ]);
     }
@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create', [
+        return view('admin.product.create', [
             'product' => [],
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),
@@ -73,7 +73,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.edit', [
+        return view('admin.product.edit', [
             'product' => $product,
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),

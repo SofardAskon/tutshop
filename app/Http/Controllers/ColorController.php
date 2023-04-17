@@ -12,7 +12,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        return view('color.index', [
+        return view('admin.color.index', [
             'colors' => Color::get()
         ]);
     }
@@ -22,7 +22,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('color.create', [
+        return view('admin.color.create', [
             'color' => [],
         ]);
     }
@@ -49,7 +49,7 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        return view('color.edit', [
+        return view('admin.color.edit', [
             'color' => $color
         ]);
     }

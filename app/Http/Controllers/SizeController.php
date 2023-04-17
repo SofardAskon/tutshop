@@ -12,7 +12,7 @@ class SizeController extends Controller
      */
     public function index()
     {
-        return view('size.index', [
+        return view('admin.size.index', [
             'sizes' => Size::get()
         ]);
     }
@@ -22,7 +22,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        return view('size.create', [
+        return view('admin.size.create', [
             'size' => [],
         ]);
     }
@@ -49,7 +49,7 @@ class SizeController extends Controller
      */
     public function edit(size $size)
     {
-        return view('size.edit', [
+        return view('admin.size.edit', [
             'size' => $size
         ]);
     }

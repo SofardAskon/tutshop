@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', AdminController::class);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CommonController::class, 'home'])->name('home');
+Route::get('/shop', [CommonController::class, 'shop'])->name('shop');
+Route::get('/shop/{id}', [CommonController::class, 'product'])->name('product');
+Route::post('/category', [CommonController::class, 'filter'])->name('filter');
 
 
 Route::prefix('admin')->group(function () {

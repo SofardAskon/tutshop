@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::get();
-        return view('category.index', compact(['categories']));
+        return view('admin.category.index', compact(['categories']));
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create', [
+        return view('admin.category.create', [
             'category' => [],
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'delimiter' => ''
@@ -51,7 +51,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('category.edit', [
+        return view('admin.category.edit', [
             'category' => $category,
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'delimiter' => ''
