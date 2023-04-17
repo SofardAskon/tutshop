@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 
@@ -13,7 +14,9 @@ class CommonController extends Controller
 {
     public function home()
     {
-        return view('home');
+        return view('home', [
+            'slider' => Slider::get(),
+        ]);
     }
 
     public function shop(Request $request)
@@ -55,7 +58,7 @@ class CommonController extends Controller
     {
         // Получаем выбранные параметры фильтрации
         // $category = json_decode($request->input('category'));
-        $categories = 1;
+        $categories = json_decode($request->input('categories'));
         $sizes = json_decode($request->input('sizes'));
         $colors = json_decode($request->input('colors'));
 

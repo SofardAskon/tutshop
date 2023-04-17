@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommonController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,18 @@ Route::get('/shop', [CommonController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [CommonController::class, 'product'])->name('product');
 Route::post('/category', [CommonController::class, 'filter'])->name('filter');
 
+Route::get('locale/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+
+    return redirect()->back();
+})->name('locale');
+
 
 Route::prefix('admin')->group(function () {
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('product', App\Http\Controllers\ProductController::class);
     Route::resource('color', App\Http\Controllers\ColorController::class);
     Route::resource('size', App\Http\Controllers\SizeController::class);
+    Route::resource('slider', App\Http\Controllers\SliderController::class);
     Route::resource('download', App\Http\Controllers\Admin\DownloadController::class)->only('store', 'update', 'destroy');
 });

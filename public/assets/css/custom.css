@@ -1,0 +1,28 @@
+.catalog-page__items {
+    position: relative;
+}
+
+.product-not-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 300%);
+}
+
+.product-not-found  h2 {
+    font-weight: 900;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.product-not-found  a {
+    background-color: #000;
+    padding: 5px 10px;
+    color: #fff;
+}
+
+@media (max-width: 812px) {
+    .product-not-found {
+        display: none;
+    }
+}

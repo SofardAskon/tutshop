@@ -39,7 +39,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
+        // $product = Product::create($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
+
+        $product = Product::create([
+            'name' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ],
+            'characteristics' => [
+                'ru' => $request->characteristics_ru,
+                'uz' => $request->characteristics_uz,
+            ],
+            'description' => [
+                'ru' => $request->description_ru,
+                'uz' => $request->description_uz,
+            ],
+            'price' => $request->price,
+            'old_price' => $request->old_price,
+        ]);
 
         if ($request->has('categories')) {
             $product->categories()->attach($request->input('categories'));
@@ -88,7 +105,25 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
-        $product->update($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
+
+        $product->update([
+            'name' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ],
+            'characteristics' => [
+                'ru' => $request->characteristics_ru,
+                'uz' => $request->characteristics_uz,
+            ],
+            'description' => [
+                'ru' => $request->description_ru,
+                'uz' => $request->description_uz,
+            ],
+            'price' => $request->price,
+            'old_price' => $request->old_price,
+        ]);
+        // $product->update($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
+
 
         $product->categories()->detach();
 

@@ -1,27 +1,52 @@
-<div class="form-group">
-    <label>Названия</label>
-    <input type="text" class="form-control form-control-border" name="name" value="{{ $product->name ?? '' }}"
-        placeholder="Названия">
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            <label>Названия (ru)</label>
+            <input type="text" class="form-control form-control-border" name="name_ru"
+                value="{{ $product ? $product->getTranslation('name', 'ru') : '' }}" placeholder="Названия">
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group">
+            <label>Названия (uz)</label>
+            <input type="text" class="form-control form-control-border" name="name_uz"
+                value="{{ $product ? $product->getTranslation('name', 'uz') : '' }}" placeholder="Названия">
+        </div>
+    </div>
 </div>
 <div class="form-group">
-    <label>Характеристики</label>
-    <input type="text" class="form-control form-control-border" name="characteristics"
-        value="{{ $product->characteristics ?? '' }}" placeholder="Характеристики">
+    <label>Характеристики (ru)</label>
+    <textarea name="characteristics_ru" class="summernote">
+        {{ $product ? $product->getTranslation('characteristics', 'ru') : '' }}
+      </textarea>
 </div>
 <div class="form-group">
-    <label>Описание</label>
-    <input type="text" class="form-control form-control-border" name="description"
-        value="{{ $product->description ?? '' }}" placeholder="Описание">
+    <label>Характеристики (uz)</label>
+    <textarea name="characteristics_uz" class="summernote">
+        {{ $product ? $product->getTranslation('characteristics', 'uz') : '' }}
+      </textarea>
+</div>
+<div class="form-group">
+    <label>Описание (ru)</label>
+    <textarea name="description_ru" class="summernote">
+        {{ $product ? $product->getTranslation('description', 'ru') : '' }}
+      </textarea>
+</div>
+<div class="form-group">
+    <label>Описание (uz)</label>
+    <textarea name="description_uz" class="summernote">
+        {{ $product ? $product->getTranslation('description', 'uz') : '' }}
+      </textarea>
 </div>
 <div class="form-group">
     <label>Цена</label>
-    <input type="text" class="form-control form-control-border" name="price" value="{{ $product->price ?? '' }}"
-        placeholder="Цена">
+    <input type="text" class="form-control form-control-border" name="price"
+        value="{{ $product ? $product->price : '' }}" placeholder="Цена">
 </div>
 <div class="form-group">
     <label>Старая цена</label>
     <input type="text" class="form-control form-control-border" name="old_price"
-        value="{{ $product->old_price ?? '' }}" placeholder="Старая цена">
+        value="{{ $product ? $product->old_price : '' }}" placeholder="Старая цена">
 </div>
 <div class="form-group">
     <label>Цвета</label>

@@ -7,6 +7,6 @@
         @endif
         
         @endisset>
-        {{ $colorItem->name ?? '' }}
+        {{ $colorItem->getTranslation('name', 'ru') ?? '' }}
     </option>
 @endforeach

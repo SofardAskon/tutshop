@@ -40,3 +40,9 @@
         </div>
     </article>
 @endforeach
+@if (!sizeof($products))
+    <div class="product-not-found">
+        <h2>Ничего не найдено!</h2>
+        <a href="{{ route('shop') }}">Показать все товары</a>
+    </div>
+@endif

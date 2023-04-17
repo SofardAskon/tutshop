@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Color extends Model
+class Slider extends Model
 {
     use HasFactory, HasTranslations;
 
     protected $guarded = [];
 
-    public $translatable = ['name'];
-    // public function products()
-    // {
-    //     return $this->belongsToMany(Product::class, 'product_variants', 'color_id', 'product_id');
-    // }
+    public $translatable = ['title', 'description'];
+
+    public function downloads()
+    {
+        return $this->morphToMany(Download::class, 'downloadable');
+    }
 }

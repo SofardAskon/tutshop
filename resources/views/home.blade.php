@@ -6,51 +6,23 @@
             <div class="discounts__body">
                 <div class="discounts__slider swiper">
                     <div class="discounts__wrapper swiper-wrapper">
-                        <div class="discounts__slide swiper-slide slide-discounts">
-                            <div class="slide-discounts__content">
-                                <h3 class="slide-discounts__title">БОЛЬШИЕ СКИДКИ</h3>
-                                <div class="slide-discounts__text">это замечательная возможность совершить
-                                    выгодную покупку и получить в качестве бонуса подарок или скидку</div>
-                                <a href="" class="slide-discounts__link button">ПОДРОБНЕЕ</a>
-                            </div>
+                        @foreach ($slider as $slide)
+                            <div class="discounts__slide swiper-slide slide-discounts">
+                                <div class="slide-discounts__content">
+                                    <h3 class="slide-discounts__title">{{ $slide->title }}</h3>
+                                    <div class="slide-discounts__text">{{ $slide->description }}</div>
+                                    <a href="{{ $slide->url }}" class="slide-discounts__link button">ПОДРОБНЕЕ</a>
+                                </div>
 
-                            <div class="slide-discounts__image-ibg">
-                                <picture>
-                                    <source srcset="{{ asset('assets/img/discounts/image01.webp') }}" type="image/webp"><img
-                                        src="{{ asset('assets/img/discounts/image01.jpg') }}" alt="">
-                                </picture>
+                                <div class="slide-discounts__image-ibg">
+                                    @foreach ($slide->downloads as $index => $downloadItem)
+                                        @if ($index == 0)
+                                            <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="#">
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div class="discounts__slide swiper-slide slide-discounts">
-                            <div class="slide-discounts__content">
-                                <h3 class="slide-discounts__title">БОЛЬШИЕ СКИДКИ</h3>
-                                <div class="slide-discounts__text">это замечательная возможность совершить
-                                    выгодную покупку и получить в качестве бонуса подарок или скидку</div>
-                                <a href="" class="slide-discounts__link button">ПОДРОБНЕЕ</a>
-                            </div>
-
-                            <div class="slide-discounts__image-ibg">
-                                <picture>
-                                    <source srcset="{{ asset('assets/img/discounts/image01.webp') }}" type="image/webp"><img
-                                        src="{{ asset('assets/img/discounts/image01.jpg') }}" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                        <div class="discounts__slide swiper-slide slide-discounts">
-                            <div class="slide-discounts__content">
-                                <h3 class="slide-discounts__title">БОЛЬШИЕ СКИДКИ</h3>
-                                <div class="slide-discounts__text">это замечательная возможность совершить
-                                    выгодную покупку и получить в качестве бонуса подарок или скидку</div>
-                                <a href="" class="slide-discounts__link button">ПОДРОБНЕЕ</a>
-                            </div>
-
-                            <div class="slide-discounts__image-ibg">
-                                <picture>
-                                    <source srcset="{{ asset('assets/img/discounts/image01.webp') }}" type="image/webp"><img
-                                        src="{{ asset('assets/img/discounts/image01.jpg') }}" alt="">
-                                </picture>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="discounts__pagination pagination"></div>
                 </div>

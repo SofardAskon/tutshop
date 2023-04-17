@@ -31,7 +31,7 @@
                                 @foreach ($products as $product)
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->getTranslation('name', 'ru') }}</td>
                                         <td> <a href="{{ route('product.edit', $product) }}">Редактировать</a> </td>
                                     </tr>
                                 @endforeach

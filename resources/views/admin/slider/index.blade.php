@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Цвета</h1>
+                        <h1 class="m-0">Слайды</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
@@ -23,19 +23,26 @@
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Browser: activate to sort column ascending">Названия</th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-label="Browser: activate to sort column ascending">Цвет</th>
+                                        colspan="1" aria-label="Browser: activate to sort column ascending">Изображения
+                                    </th>
                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                         colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                         Действия</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($colors as $color)
+                                @foreach ($sliders as $slider)
                                     <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">{{ $color->id }}</td>
-                                        <td>{{ $color->getTranslation('name', 'ru') }}</td>
-                                        <td style="background-color: {{ $color->hex_code }};"></td>
-                                        <td> <a href="{{ route('color.edit', $color) }}">Редактировать</a> </td>
+                                        <td class="dtr-control sorting_1" tabindex="0">{{ $slider->id }}</td>
+                                        <td>{{ $slider->getTranslation('title', 'ru') }}</td>
+                                        @foreach ($slider->downloads as $index => $downloadItem)
+                                            @if ($index == 0)
+                                                <td
+                                                    style="background: url({{ asset('storage') . '/' . $downloadItem->path }}) no-repeat; background-size: cover; height: 150px;">
+                                                </td>
+                                            @endif
+                                        @endforeach
+                                        <td> <a href="{{ route('slider.edit', $slider) }}">Редактировать</a> </td>
                                     </tr>
                                 @endforeach
                             </tbody>

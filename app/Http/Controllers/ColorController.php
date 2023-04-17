@@ -32,7 +32,13 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        Color::create($request->all());
+        Color::create([
+            'name' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ],
+            'hex_code' => $request->hex_code
+        ]);
 
         return redirect()->route('color.index');
     }
@@ -59,7 +65,13 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        $color->update($request->all());
+        $color->update([
+            'name' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ],
+            'hex_code' => $request->hex_code
+        ]);
 
         return redirect()->route('color.index');
     }

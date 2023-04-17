@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <style>body{opacity: 0;}</style> -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css?_v=20230415132236') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="shortcut icon" href="favicon.ico">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -158,26 +159,57 @@
                         <div class="body-header__language language-header" data-da=".menu__top,991.98,first">
                             <div data-spollers class="spollers">
                                 <div class="spollers__item language-header__block">
-                                    <button type="button" data-spoller
-                                        class="spollers__title language-header__title">
-                                        <picture>
-                                            <source srcset="{{ asset('assets/img/header/ru.webp') }}"
-                                                type="image/webp"><img src="{{ asset('assets/img/header/ru.png') }}"
-                                                alt="">
-                                        </picture>
-                                        <span>RU</span>
-                                    </button>
-                                    <ul class="language-header__body">
-                                        <li class="language-header__item">
-                                            <a href="">
+                                    @switch($locale = app()->getLocale())
+                                        @case('ru')
+                                            <button type="button" data-spoller
+                                                class="spollers__title language-header__title">
+                                                <picture>
+                                                    <source srcset="{{ asset('assets/img/header/ru.webp') }}"
+                                                        type="image/webp"><img src="{{ asset('assets/img/header/ru.png') }}"
+                                                        alt="">
+                                                </picture>
+                                                <span>RU</span>
+                                            </button>
+                                        @break
+
+                                        @case('uz')
+                                            <button type="button" data-spoller
+                                                class="spollers__title language-header__title">
                                                 <picture>
                                                     <source srcset="{{ asset('assets/img/header/uz.webp') }}"
-                                                        type="image/webp"><img
-                                                        src="{{ asset('assets/img/header/uz.png') }}" alt="">
+                                                        type="image/webp"><img src="{{ asset('assets/img/header/uz.png') }}"
+                                                        alt="">
                                                 </picture>
-                                                <span>UZ</span>
-                                            </a>
-                                        </li>
+                                                <span>RU</span>
+                                            </button>
+                                        @break
+                                    @endswitch
+                                    <ul class="language-header__body">
+                                        @if ($locale = app()->getLocale() == 'ru')
+                                            <li class="language-header__item">
+                                                <a href="{{ route('locale', 'uz') }}">
+                                                    <picture>
+                                                        <source srcset="{{ asset('assets/img/header/uz.webp') }}"
+                                                            type="image/webp"><img
+                                                            src="{{ asset('assets/img/header/uz.png') }}"
+                                                            alt="">
+                                                    </picture>
+                                                    <span>UZ</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="language-header__item">
+                                                <a href="{{ route('locale', 'ru') }}">
+                                                    <picture>
+                                                        <source srcset="{{ asset('assets/img/header/ru.webp') }}"
+                                                            type="image/webp"><img
+                                                            src="{{ asset('assets/img/header/ru.png') }}"
+                                                            alt="">
+                                                    </picture>
+                                                    <span>UZ</span>
+                                                </a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -712,6 +744,8 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
+
+
             // Получаем CSRF-токен из мета-тега
             var token = $('meta[name="csrf-token"]').attr('content');
 
@@ -735,7 +769,7 @@
             $('.checkbox, .options__input').on('change', function() {
                 // Получаем значения выбранных фильтров
                 // var category = $('#category-select').val();
-                var category = $.urlParam('category');
+                var category = $.urlParam('categories');
                 var color = $('#color-select').val();
 
                 var selectedColors = [];
