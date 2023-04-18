@@ -90,6 +90,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+
+        // dd(json_encode($product->getTranslations('characteristics')));
         return view('admin.product.edit', [
             'product' => $product,
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
@@ -105,6 +107,20 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
+        $ruCharacteristics = array_combine(
+            $request->input('characteristics_ru'),
+            $request->input('characteristics_ru_value')
+        );
+
+        $uzCharacteristics = array_combine(
+            $request->input('characteristics_uz'),
+            $request->input('characteristics_uz_value')
+        );
+
+        // $result = [
+        //     'ru' => $ruCharacteristics,
+        //     'uz' => $uzCharacteristics
+        // ];
 
         $product->update([
             'name' => [
@@ -112,8 +128,8 @@ class ProductController extends Controller
                 'uz' => $request->name_uz,
             ],
             'characteristics' => [
-                'ru' => $request->characteristics_ru,
-                'uz' => $request->characteristics_uz,
+                'ru' => $ruCharacteristics,
+                'uz' => $uzCharacteristics,
             ],
             'description' => [
                 'ru' => $request->description_ru,
@@ -142,7 +158,7 @@ class ProductController extends Controller
         }
 
         $product->downloads()->detach();
-        if ($request->has('categories')) {
+        if ($request->has('downloads')) {
             $product->downloads()->attach($request->downloads);
         }
 

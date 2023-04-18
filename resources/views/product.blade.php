@@ -113,6 +113,12 @@
 
                         <div class="price-main-product__buttons buttons-main-product">
                             <div class="buttons-main-product__main">
+                                <button id="open_popup" class="button" style="width: 100%;">КУПИТЬ</button>
+                            </div>
+                        </div>
+                        {{-- 
+                        <div class="price-main-product__buttons buttons-main-product">
+                            <div class="buttons-main-product__main">
                                 <a href="" class="buttons-main-product__card button button_blue">ПЕРЕЙТИ К
                                     КОРЗИНЕ</a>
                                 <div class="buttons-main-product__quantity quantity">
@@ -124,12 +130,12 @@
                                 </div>
                                 <button class="buttons-main-product__card button">КУПИТЬ</button>
                                 {{-- <button class="buttons-main-product__favorite _icon-favorite"></button> --}}
-                            </div>
-
-                        </div>
                     </div>
+
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -145,20 +151,10 @@
                 <div class="info-product__about about-product">
                     <div class="info-product__title">О товаре</div>
                     <div class="about-product__items">
-                        <div class="about-product__title">Цвет</div>
-                        <div class="about-product__text">Черный</div>
-                        <div class="about-product__title">Стиль</div>
-                        <div class="about-product__text">Элегантный</div>
-                        <div class="about-product__title">Паттерн</div>
-                        <div class="about-product__text">Простой</div>
-                        <div class="about-product__title">Детали</div>
-                        <div class="about-product__text">Рукав из сетки</div>
-                        <div class="about-product__title">Длина рукава</div>
-                        <div class="about-product__text">Длинный</div>
-                        <div class="about-product__title">Состав</div>
-                        <div class="about-product__text">94% полиэстер, 6% эластан</div>
-                        <div class="about-product__title">Инструкции по уходу:</div>
-                        <div class="about-product__text">Машинная стирка или профессиональная химчистка</div>
+                        @foreach ($product->characteristics as $name => $value)
+                            <div class="about-product__title">{{ $name }}</div>
+                            <div class="about-product__text">{{ $value }}</div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -445,4 +441,105 @@
         height: 100%;
         object-fit: cover;
     }
+
+    .popup-order {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+    .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .popup-content h2 {
+        font-size: 28px;
+        margin-top: 0;
+        text-align: center;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+
+    .popup-content p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .popup-content form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .popup-content label {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .popup-content input[type="text"],
+    .popup-content input[type="tel"] {
+        font-size: 16px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #000;
+    }
+
+    .popup-content button[type="submit"] {
+        font-size: 18px;
+        padding: 10px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .popup-content button[type="submit"]:hover {
+        background-color: #000000ba;
+    }
 </style>
+
+<div id="popup_order" class="popup-order">
+    <div class="popup-content">
+        <h2>Заказ</h2>
+        <p>{{ $product->name }} ({{ $product->price }})</p>
+        <form>
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</div>
+<script>
+    window.onload = function() {
+        const openPopupBtn = document.getElementById("open_popup");
+        const popup = document.getElementById("popup_order");
+
+        openPopupBtn.addEventListener("click", function() {
+            popup.style.display = "block";
+        });
+
+        window.addEventListener("click", function(event) {
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+        });
+    };
+</script>

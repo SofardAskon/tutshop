@@ -13,10 +13,12 @@
                         src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" style="object-fit:cover;">
                 @endif
             @endforeach
-            @php
-                $discount = 100 - ($product->price / $product->old_price) * 100;
-            @endphp
-            <span class="item-product__sale">{{ round($discount) }}%</span>
+            @if ($product->old_price)
+                @php
+                    $discount = 100 - ($product->price / $product->old_price) * 100;
+                @endphp
+                <span class="item-product__sale">{{ round($discount) }}%</span>
+            @endif
             {{-- <button class="item-product__favotite _icon-favorite"></button> --}}
         </a>
         <div class="item-product__content">

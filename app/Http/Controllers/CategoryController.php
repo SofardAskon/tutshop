@@ -33,7 +33,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
+        Category::create($request->except('downloads'));
+
+        // if ($request->has('downloads')) {
+        //     $request->downloads()->attach($request->downloads);
+        // }
 
         return redirect()->route('category.index');
     }
@@ -63,7 +67,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update($request->except('downloads'));
+
+        // $category->downloads()->detach();
+        // if ($request->has('downloads')) {
+        //     $category->downloads()->attach($request->downloads);
+        // }
+
         return redirect()->route('category.index');
     }
 
@@ -72,6 +82,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $category->downloads()->detach();
+        return redirect()->route('category.index');
     }
 }

@@ -10,4 +10,8 @@
         @include('admin.category._categories')
     </select>
 </div>
+
+{{-- upload-file-component --}}
+{{-- <upload-file-component-category :files={{ $category->downloads ?? '[]' }}></upload-file-component-category> --}}
+
 <button type="submit" class="btn btn-primary">Сохранить</button>

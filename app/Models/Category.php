@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    public function downloads()
+    {
+        return $this->morphToMany(Download::class, 'downloadable');
+    }
 }

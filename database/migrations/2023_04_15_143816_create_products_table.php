@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('characteristics');
             $table->text('description');
-            $table->decimal('price', 8, 2);
-            $table->decimal('old_price', 8, 2);
+            $table->decimal('price', 15, 2);
+            $table->decimal('old_price', 15, 2)->nullable();
             $table->timestamps();
 
             // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

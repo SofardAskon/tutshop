@@ -16,6 +16,7 @@ class CommonController extends Controller
     {
         return view('home', [
             'slider' => Slider::get(),
+            'products' => Product::get(),
         ]);
     }
 
