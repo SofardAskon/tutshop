@@ -7,15 +7,13 @@
     <title>AdminLTE 3 | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -32,6 +30,10 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 </head>
+@php
+    $routeName = Route::currentRouteName();
+    $routeName = explode('.', $routeName)[0];
+@endphp
 
 <body class="hold-transition sidebar-mini layout-fixed" id="app">
     <div class="wrapper">
@@ -47,8 +49,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">На сайт</a>
@@ -61,9 +62,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/admin" class="brand-link">
-                {{-- <img
-                    src="{{ asset('adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .') }}8"> --}}
-                <span class="brand-text font-weight-light">TUTSHOP</span>
+                <img src="{{ asset('assets/img/logo.png') }}" width="100">
+                {{-- <span class="brand-text font-weight-light">TUTSHOP</span> --}}
             </a>
 
             <!-- Sidebar -->
@@ -94,8 +94,7 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -115,8 +114,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ $routeName === 'product' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'product' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-house"></i>
                                 <p>
                                     Товары
@@ -138,8 +137,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ $routeName === 'category' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'category' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>
                                 <p>
                                     Категории
@@ -161,8 +160,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ $routeName === 'color' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'color' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>
                                 <p>
                                     Цвета
@@ -184,8 +183,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ $routeName === 'size' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'size' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>
                                 <p>
                                     Размеры
@@ -207,8 +206,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ $routeName === 'slider' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'slider' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>
                                 <p>
                                     Слайдер
@@ -322,6 +321,12 @@
 
         })
     </script>
+
+    <style>
+        [class*=sidebar-dark-] {
+            background: #000 !important;
+        }
+    </style>
 </body>
 
 </html>

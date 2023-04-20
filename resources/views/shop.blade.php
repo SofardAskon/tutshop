@@ -7,8 +7,7 @@
                 <div class="catalog-page__filter filter-catalog-page">
                     <ul class="filter-catalog-page__categoty">
                         @foreach ($categories as $categoryItem)
-                            <li class="filter-catalog-page__item-category" data-id="{{ $categoryItem->id }}"><a
-                                    href="/shop?categories={{ $categoryItem->id }}">{{ $categoryItem->title }}</a>
+                            <li class="filter-catalog-page__item-category" data-id="{{ $categoryItem->id }}"><a href="/shop?categories={{ $categoryItem->id }}">{{ $categoryItem->title }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -21,34 +20,29 @@
                             </div>
 
                             <div class="filter__item item-filter">
-                                <button type="button" data-spoller
-                                    class="item-filter__title _spoller-active">Размеры</button>
+                                <button type="button" data-spoller class="item-filter__title _spoller-active">{{ trans('common.sizes') }}</button>
                                 <div class="item-filter__body">
                                     @foreach ($sizes as $index => $sizeItem)
                                         <div class="checkbox">
-                                            <input id="c_{{ $index }}" data-error="Ошибка" class="checkbox__input"
-                                                type="checkbox" value="{{ $sizeItem->id }}" name="size[]">
-                                            <label for="c_{{ $index }}" class="checkbox__label"><span
-                                                    class="checkbox__text">{{ $sizeItem->name }}</span></label>
+                                            <input id="c_{{ $index }}" data-error="Ошибка" class="checkbox__input" type="checkbox" value="{{ $sizeItem->id }}" name="size[]">
+                                            <label for="c_{{ $index }}" class="checkbox__label"><span class="checkbox__text">{{ $sizeItem->name }}</span></label>
                                         </div>
                                     @endforeach
 
                                 </div>
                             </div>
                             <div class="filter__item item-filter item-filter_range">
-                                <button type="button" data-spoller class="item-filter__title _spoller-active">Цена</button>
+                                <button type="button" data-spoller class="item-filter__title _spoller-active">{{ trans('common.price') }}</button>
                                 <div class="item-filter__body">
                                     <div class="range">
                                         <div gata-range></div>
                                         <div class="range__content">
                                             <div class="range__item">
-                                                <input tabindex="-1" readonly type="text" data-min="20000"
-                                                    data-start="100000" gata-value value="0">
+                                                <input tabindex="-1" readonly type="text" data-min="20000" data-start="100000" gata-value value="0">
                                                 <span gata-value></span> <span>&nbsp;Sʻ</span>
                                             </div>
                                             <div class="range__item">
-                                                <input tabindex="-1" readonly type="text" data-max="300000"
-                                                    data-end="250000" gata-value value="200000">
+                                                <input tabindex="-1" readonly type="text" data-max="300000" data-end="250000" gata-value value="200000">
                                                 <span gata-value></span>&nbsp;Sʻ
                                             </div>
                                         </div>
@@ -56,14 +50,13 @@
                                 </div>
                             </div>
                             <div class="filter__item item-filter item-filter_colors">
-                                <button type="button" data-spoller class="item-filter__title _spoller-active">Цвет</button>
+                                <button type="button" data-spoller class="item-filter__title _spoller-active">{{ trans('common.color') }}</button>
                                 <div class="item-filter__body">
 
                                     <div class="options options_color">
                                         @foreach ($colors as $index => $colorItem)
                                             <div class="options__item">
-                                                <input hidden id="o_{{ $index }}" class="options__input"
-                                                    type="checkbox" value="{{ $colorItem->id }}" name="color[]">
+                                                <input hidden id="o_{{ $index }}" class="options__input" type="checkbox" value="{{ $colorItem->id }}" name="color[]">
                                                 <label for="o_{{ $index }}" class="options__label">
                                                     <span style="background: {{ $colorItem->hex_code }};"></span>
                                                     <span style="border-color: {{ $colorItem->hex_code }};"></span>

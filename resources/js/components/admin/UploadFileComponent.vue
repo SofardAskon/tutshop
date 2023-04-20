@@ -53,6 +53,17 @@
                             </button>
                         </div>
                     </template>
+                    <a
+                        :href="'/storage/' + download.path"
+                        class="input-group-prepend mr-3"
+                        target="_blank"
+                    >
+                        <img
+                            :src="'/storage/' + download.path"
+                            width="50"
+                            height="50"
+                        />
+                    </a>
                     <div class="input-group-prepend" @click="deleteFile(index)">
                         <button type="button" class="btn btn-outline-danger">
                             Удалить
@@ -83,7 +94,7 @@ export default {
     props: ["files"],
     mounted() {
         this.downloads = this.files;
-        console.log("component mounted");
+        console.log(" mcomponentounted");
     },
     methods: {
         addFile() {

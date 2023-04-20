@@ -12,21 +12,18 @@
 
                                 @foreach ($product->downloads as $index => $downloadItem)
                                     <div class="main-product__trumb-slide trumb-slide swiper-slide">
-                                        <div class="trumb-slide__image"><img
-                                                src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="">
+                                        <div class="trumb-slide__image"><img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="">
                                         </div>
                                     </div>
                                 @endforeach
 
-
-                                {{-- <div class="main-product__trumb-slide trumb-slide swiper-slide _icon-play">
-                                    <div class="trumb-slide__image">
-                                        <picture>
-                                            <source srcset="img/article/trumb2.webp" type="image/webp"><img
-                                                src="img/article/trumb2.jpg" alt="">
-                                        </picture>
+                                @if ($product->video)
+                                    <div class="main-product__trumb-slide trumb-slide swiper-slide _icon-play">
+                                        <div class="trumb-slide__image">
+                                            <img src="{{ asset('storage') . '/' . $product->downloads[0]->path }}" alt="{{ $product->title }}">
+                                        </div>
                                     </div>
-                                </div> --}}
+                                @endif
                             </div>
                         </div>
 
@@ -41,15 +38,13 @@
                                     </div>
                                 @endforeach
 
-                                {{-- <a href="https://www.youtube.com/watch?v=Jqf9haCd6mM"
-                                    class="main-product__slide main-product-slide swiper-slide _icon-play" data-fancybox>
-                                    <div class="main-product-slide__image">
-                                        <picture>
-                                            <source srcset="img/article/image1.webp" type="image/webp"><img
-                                                src="img/article/image1.jpg" alt="">
-                                        </picture>
-                                    </div>
-                                </a> --}}
+                                @if ($product->video)
+                                    <a href="{{ $product->video }}" class="main-product__slide main-product-slide swiper-slide _icon-play" data-fancybox>
+                                        <div class="main-product-slide__image">
+                                            <img src="{{ asset('storage') . '/' . $product->downloads[0]->path }}" alt="{{ $product->title }}">
+                                        </div>
+                                    </a>
+                                @endif
                             </div>
                             <div class="main-product__pagination pagination_fraction pagination"></div>
                         </div>
@@ -80,14 +75,13 @@
                             @endif
                         </div>
                         <div class="price-main-product__colors">
-                            <div class="price-main-product__title-colors">Цвет: <span>Черный</span></div>
+                            <div class="price-main-product__title-colors">{{ trans('common.color') }}: <span id="product-color-name"> </span></div>
                             <div class="options options_color">
                                 @isset($product->colors)
                                     @foreach ($product->colors as $index => $colorItem)
                                         <div class="options__item">
-                                            <input hidden id="o_{{ $index }}" class="options__input" type="radio"
-                                                value="{{ $colorItem->name }}" name="color">
-                                            <label for="o_{{ $index }}" class="options__label">
+                                            <input hidden id="o_{{ $index }}" class="options__input" type="radio" value="{{ $colorItem->name }}" name="color">
+                                            <label for="o_{{ $index }}" class="options__label" data-color-name="{{ $colorItem->name }}">
                                                 <span style="background: {{ $colorItem->hex_code }};"></span>
                                                 <span style="border-color: {{ $colorItem->hex_code }};"></span>
                                             </label>
@@ -96,24 +90,23 @@
                                 @endisset
                             </div>
                         </div>
-                        <div class="price-main-product__sizes sizes-main-product">
-                            <div class="sizes-main-product__title">Размер</div>
-                            <div class="sizes-main-product__items">
-                                @foreach ($product->sizes as $index => $sizeItem)
-                                    <div class="checkbox checkbox_size">
-                                        <input id="y_{{ $index }}" class="checkbox__input" type="radio"
-                                            value="{{ $sizeItem->name }}" name="size">
-                                        <label for="y_{{ $index }}" class="checkbox__label"><span
-                                                class="checkbox__text">{{ $sizeItem->name }}</span></label>
-                                    </div>
-                                @endforeach
+                        @if (sizeof($product->sizes) > 0)
+                            <div class="price-main-product__sizes sizes-main-product">
+                                <div class="sizes-main-product__title">{{ trans('common.size') }}:</div>
+                                <div class="sizes-main-product__items">
+                                    @foreach ($product->sizes as $index => $sizeItem)
+                                        <div class="checkbox checkbox_size" data-size-name="{{ $sizeItem->name }}">
+                                            <input id="y_{{ $index }}" class="checkbox__input" type="radio" value="{{ $sizeItem->name }}" name="size">
+                                            <label for="y_{{ $index }}" class="checkbox__label"><span class="checkbox__text">{{ $sizeItem->name }}</span></label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button class="sizes-main-product__btn" data-popup="#popup_size">{{ trans('common.size_chart') }}</button>
                             </div>
-                            <button class="sizes-main-product__btn" data-popup="#popup_size">Размерная сетка</button>
-                        </div>
-
+                        @endif
                         <div class="price-main-product__buttons buttons-main-product">
                             <div class="buttons-main-product__main">
-                                <button id="open_popup" class="button" style="width: 100%;">КУПИТЬ</button>
+                                <button id="open_popup" class="button" style="width: 100%;">{{ trans('common.buy') }}</button>
                             </div>
                         </div>
                         {{-- 
@@ -143,13 +136,12 @@
         <div class="info-product__container">
             <div class="info-product__body_small">
                 <div class="info-product__description description-product" data-showmore>
-                    <div class="description-product__title info-product__title">Описание</div>
-                    <div data-showmore-content="50" class="description-product__content">{{ $product->description }}</div>
-                    <button hidden data-showmore-button type="button"
-                        class="description-product__more"><span>Подробнее</span><span>Скыть</span></button>
+                    <div class="description-product__title info-product__title">{{ trans('common.description') }}</div>
+                    <div data-showmore-content="50" class="description-product__content">{!! $product->description !!}</div>
+                    <button hidden data-showmore-button type="button" class="description-product__more"><span>{{ trans('common.details') }}</span><span>Скыть</span></button>
                 </div>
                 <div class="info-product__about about-product">
-                    <div class="info-product__title">О товаре</div>
+                    <div class="info-product__title">{{ trans('common.about_the_product') }}</div>
                     <div class="about-product__items">
                         @foreach ($product->characteristics as $name => $value)
                             <div class="about-product__title">{{ $name }}</div>
@@ -160,19 +152,16 @@
 
                 <div class="info-product__size">
                     <picture>
-                        <source srcset="img/article/image01.webp" type="image/webp"><img src="img/article/image01.jpg"
-                            alt="">
+                        <source srcset="img/article/image01.webp" type="image/webp"><img src="img/article/image01.jpg" alt="">
                     </picture>
                 </div>
 
                 <div class="info-product__images">
                     <picture>
-                        <source srcset="img/article/image02.webp" type="image/webp"><img src="img/article/image02.jpg"
-                            alt="">
+                        <source srcset="img/article/image02.webp" type="image/webp"><img src="img/article/image02.jpg" alt="">
                     </picture>
                     <picture>
-                        <source srcset="img/article/image03.webp" type="image/webp"><img src="img/article/image03.jpg"
-                            alt="">
+                        <source srcset="img/article/image03.webp" type="image/webp"><img src="img/article/image03.jpg" alt="">
                     </picture>
                 </div>
 
@@ -221,7 +210,7 @@
                 </div> --}}
 
 
-                <form action="#" class="info-product__reviews-form reviews-form">
+                {{-- <form action="#" class="info-product__reviews-form reviews-form">
 
 
                     <div class="reviews-form__title">Отзыв о товаре</div>
@@ -245,24 +234,21 @@
 
                     <div class="reviews-form__line">
                         <label for="" class="reviews-form__label">
-                            <input autocomplete="off" type="text" name="form[]" data-error="Введите имя"
-                                data-required placeholder="Имя*" class="input">
+                            <input autocomplete="off" type="text" name="form[]" data-error="Введите имя" data-required placeholder="Имя*" class="input">
                         </label>
                         <label for="" class="reviews-form__label">
-                            <input autocomplete="off" type="text" name="form[]" data-error="Введите номер телефона"
-                                data-required placeholder="Номер телефона*" class="input">
+                            <input autocomplete="off" type="text" name="form[]" data-error="Введите номер телефона" data-required placeholder="Номер телефона*" class="input">
                         </label>
                     </div>
                     <div class="reviews-form__line">
-                        <textarea autocomplete="off" name="form[]" placeholder="Ваш отзыв*" data-error="Заполните поле" data-required
-                            class="input"></textarea>
+                        <textarea autocomplete="off" name="form[]" placeholder="Ваш отзыв*" data-error="Заполните поле" data-required class="input"></textarea>
                     </div>
 
                     <div class="reviews-form__buttons">
                         <button class="reviews-form__button button">ОСТАВИТЬ ОТЗЫВ</button>
                     </div>
 
-                </form>
+                </form> --}}
 
 
             </div>
@@ -312,7 +298,7 @@
                             </div>
                             <div class="item-product__buttons">
                                 <button class="item-product__card-button _icon-card-product"></button>
-                                <a href="" class="button">ПОДРОБНЕЕ</a>
+                                <a href="" class="button">{{ trans('common.details') }}</a>
                             </div>
                         </div>
                     </article>
@@ -350,7 +336,7 @@
                             </div>
                             <div class="item-product__buttons">
                                 <button class="item-product__card-button _icon-card-product"></button>
-                                <a href="" class="button">ПОДРОБНЕЕ</a>
+                                <a href="" class="button">{{ trans('common.details') }}</a>
                             </div>
                         </div>
                     </article>
@@ -388,7 +374,7 @@
                             </div>
                             <div class="item-product__buttons">
                                 <button class="item-product__card-button _icon-card-product"></button>
-                                <a href="" class="button">ПОДРОБНЕЕ</a>
+                                <a href="" class="button">{{ trans('common.details') }}</a>
                             </div>
                         </div>
                     </article>
@@ -426,7 +412,7 @@
                             </div>
                             <div class="item-product__buttons">
                                 <button class="item-product__card-button _icon-card-product"></button>
-                                <a href="" class="button">ПОДРОБНЕЕ</a>
+                                <a href="" class="button">{{ trans('common.details') }}</a>
                             </div>
                         </div>
                     </article>
@@ -514,17 +500,26 @@
     }
 </style>
 
-<div id="popup_order" class="popup-order">
+<div id="popup_order" class="popup-order" @if (session('order_status')) style="display:block;" @endif>
     <div class="popup-content">
-        <h2>Заказ</h2>
-        <p>{{ $product->name }} ({{ $product->price }})</p>
-        <form>
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="phone">Телефон:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <button type="submit">Отправить</button>
-        </form>
+        @if (session('order_status'))
+            <h2>{{ trans('common.application_successfully_sent') }}</h2>
+        @else
+            <h2>{{ trans('common.order') }}</h2>
+            <p>{{ $product->name }} ({{ $product->price }})</p>
+            <form action="{{ route('order') }}" method="POST">
+                @csrf
+                <input type="text" name="product" value="{{ $product->name }}" hidden>
+                <input type="text" id="form-order-color-name" name="color" value="" hidden>
+                <input type="text" id="form-order-size-name" name="size" value="" hidden>
+                <input type="text" name="url" value="{{ url()->current() }}" hidden>
+                <label for="name">{{ trans('common.name') }}:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="phone">{{ trans('common.phone') }}:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <button type="submit">{{ trans('common.send') }}</button>
+            </form>
+        @endif
     </div>
 </div>
 <script>
@@ -542,4 +537,24 @@
             }
         });
     };
+    document.addEventListener('DOMContentLoaded', () => {
+        const colorElements = document.querySelectorAll('[data-color-name]');
+        const dataSizeName = document.querySelectorAll('[data-size-name]');
+        // const formSizeName = document.querySelectorAll('[data-color-name]');
+
+        colorElements.forEach(colorElement => {
+            colorElement.addEventListener('click', () => {
+                const colorName = colorElement.getAttribute('data-color-name');
+                document.querySelector('#product-color-name').innerText = colorName;
+                document.querySelector('#form-order-color-name').value = colorName;
+            });
+        });
+
+        dataSizeName.forEach(colorElement => {
+            colorElement.addEventListener('click', () => {
+                const sizeName = colorElement.getAttribute('data-size-name');
+                document.querySelector('#form-order-size-name').value = sizeName;
+            });
+        });
+    });
 </script>

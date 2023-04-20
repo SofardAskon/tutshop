@@ -41,6 +41,12 @@ class ProductController extends Controller
     {
         // $product = Product::create($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
 
+        $validatedData = $request->validate([
+            'name_ru' => 'required|string|max:255',
+            'name_uz' => 'required|string|max:255',
+            'price' => 'numeric|min:0'
+        ]);
+
         $product = Product::create([
             'name' => [
                 'ru' => $request->name_ru,
@@ -54,6 +60,7 @@ class ProductController extends Controller
                 'ru' => $request->description_ru,
                 'uz' => $request->description_uz,
             ],
+            'video' => $request->video,
             'price' => $request->price,
             'old_price' => $request->old_price,
         ]);
@@ -135,6 +142,7 @@ class ProductController extends Controller
                 'ru' => $request->description_ru,
                 'uz' => $request->description_uz,
             ],
+            'video' => $request->video,
             'price' => $request->price,
             'old_price' => $request->old_price,
         ]);

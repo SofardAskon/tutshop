@@ -3740,6 +3740,10 @@ body::after {
       flex-shrink: 0;
 }
 
+.item-category__image img {
+  max-width: 100%;
+}
+
 .item-category__title {
   font-weight: 700;
   line-height: 190.5%;
@@ -4506,10 +4510,31 @@ body::after {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  z-index: 2;
+}
+
+.trumb-slide__image img {
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .main-product-slide {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .main-product-slide._icon-play::before {
@@ -4530,6 +4555,10 @@ body::after {
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 1;
+}
+
+.main-product-slide__image img {
+  max-width: 100%;
 }
 
 .content-main-product {
@@ -6570,6 +6599,25 @@ body:not(.is-using-mouse) .fancybox__container :focus {
 
   .item-category {
     background: #eff0f6;
+    min-height: 8.75rem;
+  }
+
+  .item-category__image {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 85px;
+            flex: 0 0 85px;
+    position: relative;
+    height: 100%;
+  }
+
+  .item-category__image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
 
   .main-product__pagination {
@@ -7336,6 +7384,7 @@ body:not(.is-using-mouse) .fancybox__container :focus {
     height: 70px;
     background: #eff0f6;
     border-radius: 50%;
+    overflow: hidden;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -7411,8 +7460,8 @@ body:not(.is-using-mouse) .fancybox__container :focus {
     height: 100%;
     top: 0;
     left: 0;
-    -o-object-fit: cover;
-       object-fit: cover;
+    -o-object-fit: contain;
+       object-fit: contain;
   }
 
   .content-main-product__title small {

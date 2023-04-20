@@ -102,4 +102,38 @@ class CommonController extends Controller
             'product' => Product::findOrFail($request->id)
         ]);
     }
+
+    public function createOrder(Request $request)
+    {
+
+        // dd($request->all());
+
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $color = $_POST['color'];
+        $size = $_POST['size'];
+        $url = $_POST['url'];
+
+        $token = "5460979120:AAFnQ-wSdeNfLRi4mVlHDBOsblFEUE183mQ";
+        $chat_id = "-952609477";
+
+
+        $arr = array(
+            '<b>Новая заявка ✅</b>' => '',
+            'Имя: ' => $name,
+            'Телефон: ' => $phone,
+            'Цвет: ' => $color,
+            'Размер: ' => $size,
+            'Ссылка на сам продукт: ' => $url,
+        );
+
+        $txt = '';
+        foreach ($arr as $key => $value) {
+            $txt .= "<b>" . $key . "</b> " . $value . "%0A";
+        };
+
+        $sendToTelegram = fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}", "r");
+
+        return redirect()->back()->with('order_status', 'Ahhha');
+    }
 }

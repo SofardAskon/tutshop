@@ -7,7 +7,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <style>body{opacity: 0;}</style> -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css?_v=20230415132236') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css?_v=202304151322361') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="shortcut icon" href="favicon.ico">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
@@ -32,94 +32,22 @@
                                     <div class="content-menu__item">
                                         <div data-spollers class="spollers">
                                             <div class="spollers__item">
-                                                <button type="button" data-spoller
-                                                    class="spollers__title  _icon-catalog"><span
-                                                        class="_icon-arrow-down">Каталог</span></button>
+                                                <button type="button" data-spoller class="spollers__title  _icon-catalog"><span class="_icon-arrow-down">{{ trans('common.catalog') }}</span></button>
                                                 <div class="spollers__body">
                                                     <div data-spollers data-one-spoller class="spollers spollers-sub">
-                                                        <button type="button" data-spoller
-                                                            class="spollers-sub__title _icon-arrow-down">Одежда и
-                                                            обувь</button>
-                                                        <ul class="spollers-sub__body">
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                        </ul>
-                                                        <button type="button" data-spoller
-                                                            class="spollers-sub__title _icon-arrow-down">Одежда и
-                                                            обувь</button>
-                                                        <ul class="spollers-sub__body">
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                        </ul>
-                                                        <button type="button" data-spoller
-                                                            class="spollers-sub__title _icon-arrow-down">Одежда и
-                                                            обувь</button>
-                                                        <ul class="spollers-sub__body">
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                        </ul>
-                                                        <button type="button" data-spoller
-                                                            class="spollers-sub__title _icon-arrow-down">Одежда и
-                                                            обувь</button>
-                                                        <ul class="spollers-sub__body">
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                            <li class="spollers-sub__line"><a
-                                                                    href="">Подкатегория</a></li>
-                                                        </ul>
+                                                        @include('_categories-mobile')
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href=""
-                                        class="content-menu__item content-menu__item_link _icon-card">Корзина</a>
-                                    <a href=""
-                                        class="content-menu__item content-menu__item_link _icon-favorite">Избранное</a>
+                                    {{-- <a href="" class="content-menu__item content-menu__item_link _icon-card">Корзина</a>
+                                    <a href="" class="content-menu__item content-menu__item_link _icon-favorite">Избранное</a>
                                     <a href="" class="content-menu__item content-menu__item_link _icon-about">О
-                                        нас</a>
+                                        нас</a> --}}
                                     <div class="content-menu__contact">
-                                        <div class="content-menu__item-contact">Контакты</div>
-                                        <a href="mailto:magazin@mail.ru"
-                                            class="content-menu__item-contact">magazin@mail.ru</a>
+                                        <div class="content-menu__item-contact">{{ trans('common.contacts') }}</div>
+                                        <a href="mailto:magazin@mail.ru" class="content-menu__item-contact">magazin@mail.ru</a>
                                         <a href="to:998999999999" class="content-menu__item-contact">+998 99 999 99
                                             99</a>
                                     </div>
@@ -128,14 +56,10 @@
                         </div>
                         <nav class="top-header__nav">
                             <ul class="top-header__list">
-                                <li class="top-header__item"><a href="" class="top-header__link">О нас</a>
-                                </li>
-                                <li class="top-header__item"><a href="" class="top-header__link">Доставка</a>
-                                </li>
-                                <li class="top-header__item"><a href="" class="top-header__link">Контакты</a>
-                                </li>
-                                <li class="top-header__item"><a href="" class="top-header__link">Оставить
-                                        отзыв</a></li>
+                                <li class="top-header__item"><a href="" class="top-header__link">{{ trans('common.about_us') }}</a></li>
+                                <li class="top-header__item"><a href="" class="top-header__link">{{ trans('common.delivery') }}</a></li>
+                                <li class="top-header__item"><a href="" class="top-header__link">{{ trans('common.contacts') }}</a></li>
+                                <li class="top-header__item"><a href="" class="top-header__link">{{ trans('common.leave_feedback') }}</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -145,54 +69,33 @@
                 <div class="body-header__container">
                     <div class="body-header__inner">
                         <div class="body-header__logo" data-da=".top-header__body,991.98,1">
-                            <a href="/" class="body-header__link-logo"><img
-                                    src="{{ asset('assets/img/logo.png') }}" alt="" width="100"></a>
+                            <a href="/" class="body-header__link-logo"><img src="{{ asset('assets/img/logo.png') }}" alt="" width="100"></a>
                         </div>
-                        <button class="body-header__catalog catalog-btn _icon-catalog">Каталог</button>
+                        <button class="body-header__catalog catalog-btn _icon-catalog">{{ trans('common.catalog') }}</button>
                         <div class="body-header__search search-header">
                             <form action="#" class="search-header__form">
                                 <button type="button" class="_icon-search"></button>
-                                <input autocomplete="off" type="text" name="form[]" placeholder="Search"
-                                    class="">
+                                <input autocomplete="off" type="text" name="form[]" placeholder="{{ trans('common.search') }}" class="">
                             </form>
                         </div>
                         <div class="body-header__language language-header" data-da=".menu__top,991.98,first">
                             <div data-spollers class="spollers">
                                 <div class="spollers__item language-header__block">
-                                    @switch($locale = app()->getLocale())
-                                        @case('ru')
-                                            <button type="button" data-spoller
-                                                class="spollers__title language-header__title">
-                                                <picture>
-                                                    <source srcset="{{ asset('assets/img/header/ru.webp') }}"
-                                                        type="image/webp"><img src="{{ asset('assets/img/header/ru.png') }}"
-                                                        alt="">
-                                                </picture>
-                                                <span>RU</span>
-                                            </button>
-                                        @break
 
-                                        @case('uz')
-                                            <button type="button" data-spoller
-                                                class="spollers__title language-header__title">
-                                                <picture>
-                                                    <source srcset="{{ asset('assets/img/header/uz.webp') }}"
-                                                        type="image/webp"><img src="{{ asset('assets/img/header/uz.png') }}"
-                                                        alt="">
-                                                </picture>
-                                                <span>RU</span>
-                                            </button>
-                                        @break
-                                    @endswitch
+                                    <button type="button" data-spoller class="spollers__title language-header__title">
+                                        <picture>
+                                            <source srcset="{{ asset('assets/img/header/' . app()->getLocale() . '.webp') }}" type="image/webp">
+                                            <img src="{{ asset('assets/img/header/' . app()->getLocale() . '.png') }}" alt="">
+                                        </picture>
+                                        <span style="text-transform: uppercase;">{{ app()->getLocale() }}</span>
+                                    </button>
+
                                     <ul class="language-header__body">
-                                        @if ($locale = app()->getLocale() == 'ru')
+                                        @if (app()->getLocale() == 'ru')
                                             <li class="language-header__item">
                                                 <a href="{{ route('locale', 'uz') }}">
                                                     <picture>
-                                                        <source srcset="{{ asset('assets/img/header/uz.webp') }}"
-                                                            type="image/webp"><img
-                                                            src="{{ asset('assets/img/header/uz.png') }}"
-                                                            alt="">
+                                                        <source srcset="{{ asset('assets/img/header/uz.webp') }}" type="image/webp"><img src="{{ asset('assets/img/header/uz.png') }}" alt="">
                                                     </picture>
                                                     <span>UZ</span>
                                                 </a>
@@ -201,12 +104,9 @@
                                             <li class="language-header__item">
                                                 <a href="{{ route('locale', 'ru') }}">
                                                     <picture>
-                                                        <source srcset="{{ asset('assets/img/header/ru.webp') }}"
-                                                            type="image/webp"><img
-                                                            src="{{ asset('assets/img/header/ru.png') }}"
-                                                            alt="">
+                                                        <source srcset="{{ asset('assets/img/header/ru.webp') }}" type="image/webp"><img src="{{ asset('assets/img/header/ru.png') }}" alt="">
                                                     </picture>
-                                                    <span>UZ</span>
+                                                    <span>RU</span>
                                                 </a>
                                             </li>
                                         @endif
@@ -244,13 +144,11 @@
                                 <div class="banner-catalog__body">
                                     <div class="banner-catalog__title">НОВИНКИ ВЕСНЫ </div>
                                     <div class="banner-catalog__sub-title">2023</div>
-                                    <a href="" class="banner-catalog__link">ПОДРОБНЕЕ</a>
+                                    <a href="" class="banner-catalog__link">{{ trans('common.details') }}</a>
                                 </div>
                                 <div class="banner-catalog__image-ibg">
                                     <picture>
-                                        <source srcset="{{ asset('assets/img/header/banner1.webp') }}"
-                                            type="image/webp"><img src="{{ asset('assets/img/header/banner1.jpg') }}"
-                                            alt="">
+                                        <source srcset="{{ asset('assets/img/header/banner1.webp') }}" type="image/webp"><img src="{{ asset('assets/img/header/banner1.jpg') }}" alt="">
                                     </picture>
                                 </div>
                             </div>
@@ -258,13 +156,11 @@
                                 <div class="banner-catalog__body">
                                     <div class="banner-catalog__title">ПОДБОРКА ГАДЖЕТОВ </div>
                                     <div class="banner-catalog__sub-title">ДЛЯ ДОМА</div>
-                                    <a href="" class="banner-catalog__link">ПОДРОБНЕЕ</a>
+                                    <a href="" class="banner-catalog__link">{{ trans('common.details') }}</a>
                                 </div>
                                 <div class="banner-catalog__image-ibg">
                                     <picture>
-                                        <source srcset="{{ asset('assets/img/header/banner2.webp') }}"
-                                            type="image/webp"><img src="{{ asset('assets/img/header/banner2.jpg') }}"
-                                            alt="">
+                                        <source srcset="{{ asset('assets/img/header/banner2.webp') }}" type="image/webp"><img src="{{ asset('assets/img/header/banner2.jpg') }}" alt="">
                                     </picture>
                                 </div>
                             </div>
@@ -277,9 +173,9 @@
             <section class="page__advantages advantages">
                 <div class="advantages__container">
                     <div class="advantages__body">
-                        <div class="advantages__item">бесплатный возврат</div>
-                        <div class="advantages__item">информация о покупке</div>
-                        <div class="advantages__item">доставка</div>
+                        <div class="advantages__item">{{ trans('common.free_return') }}</div>
+                        <div class="advantages__item">{{ trans('common.purchase_information') }}</div>
+                        <div class="advantages__item">{{ trans('common.delivery') }}</div>
                     </div>
                 </div>
             </section>
@@ -289,42 +185,30 @@
             <div class="footer__container">
                 <div class="footer__body">
                     <div class="footer__logo">
-                        <a href="/" class="body-header__link-logo"><img
-                                src="{{ asset('assets/img/logo.png') }}" alt="" width="100"></a>
+                        <a href="/" class="body-header__link-logo"><img src="{{ asset('assets/img/logo.png') }}" alt="" width="100"></a>
                     </div>
                     <div class="footer__items">
                         <ul class="footer__item item-footer">
-                            <li class="item-footer__title">О компании</li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">О нас</a>
-                            </li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Доставка</a>
-                            </li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Контакты</a>
-                            </li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Акции</a>
-                            </li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Оставить
-                                    отзыв</a></li>
+                            <li class="item-footer__title">{{ trans('common.about_company') }}</li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.about_us') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.delivery') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.contacts') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.stock') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.leave_feedback') }}</a></li>
                         </ul>
                         <ul class="footer__item item-footer">
-                            <li class="item-footer__title">Каталог</li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Детские
-                                    игрушки</a></li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Бытовая
-                                    техника</a></li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Электроника</a>
-                            </li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Одежда и
-                                    обувь</a></li>
-                            <li class="item-footer__item"><a href="" class="item-footer__link">Все для
-                                    дома</a></li>
+                            <li class="item-footer__title">{{ trans('common.catalog') }}</li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.kids_toys') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.appliances') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.electronics') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.clothing_and_footwear') }}</a></li>
+                            <li class="item-footer__item"><a href="" class="item-footer__link">{{ trans('common.housing') }}</a></li>
                         </ul>
                         <ul class="footer__item item-footer item-footer_contact">
-                            <li class="item-footer__title">Контакты</li>
+                            <li class="item-footer__title">{{ trans('common.contacts') }}</li>
                             <li class="item-footer__item"><a href="tel:+998999999999" class="item-footer__link">+998
                                     99 999 99 99</a></li>
-                            <li class="item-footer__item"><a href="mailto:magazin@mail.ru"
-                                    class="item-footer__link">magazin@mail.ru</a></li>
+                            <li class="item-footer__item"><a href="mailto:magazin@mail.ru" class="item-footer__link">magazin@mail.ru</a></li>
                         </ul>
                     </div>
                 </div>
@@ -338,8 +222,7 @@
                 <div class="popup-size__title">Размерная сетка</div>
                 <div class="popup-size__image">
                     <picture>
-                        <source srcset="{{ asset('assets/img/popup/image01.webp') }}" type="image/webp"><img
-                            src="{{ asset('assets/img/popup/image01.jpg') }}" alt="">
+                        <source srcset="{{ asset('assets/img/popup/image01.webp') }}" type="image/webp"><img src="{{ asset('assets/img/popup/image01.jpg') }}" alt="">
                     </picture>
                 </div>
             </div>
@@ -369,31 +252,25 @@
                     </div>
                     <div class="reviews-form__line">
                         <label for="" class="reviews-form__label">
-                            <input autocomplete="off" type="text" name="form[]" data-error="Введите имя"
-                                data-required placeholder="Имя*" class="input">
+                            <input autocomplete="off" type="text" name="form[]" data-error="Введите имя" data-required placeholder="Имя*" class="input">
                         </label>
                         <label for="" class="reviews-form__label">
-                            <input autocomplete="off" type="text" name="form[]"
-                                data-error="Введите номер телефона" data-required placeholder="Номер телефона*"
-                                class="input">
+                            <input autocomplete="off" type="text" name="form[]" data-error="Введите номер телефона" data-required placeholder="Номер телефона*" class="input">
                         </label>
                     </div>
                     <div class="reviews-form__line">
-                        <textarea autocomplete="off" name="form[]" placeholder="Ваш отзыв*" data-error="Заполните поле" data-required
-                            class="input"></textarea>
+                        <textarea autocomplete="off" name="form[]" placeholder="Ваш отзыв*" data-error="Заполните поле" data-required class="input"></textarea>
                     </div>
                     <div class="reviews-form__buttons">
-                        <button data-close type="button"
-                            class="reviews-form__button button button_secondary">ОТМЕНИТЬ</button>
+                        <button data-close type="button" class="reviews-form__button button button_secondary">ОТМЕНИТЬ</button>
                         <button class="reviews-form__button button">ОТПРАВИТЬ</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/js/app.min.js?_v=20230415132236') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/app.min.js?_v=202304151322361') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
 

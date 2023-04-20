@@ -17433,21 +17433,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ["data"],
   mounted: function mounted() {
-    var keysRu = Object.keys(this.data.ru);
-    var keysUz = Object.keys(this.data.uz);
-    for (var i = 0; i < Math.max(keysRu.length, keysUz.length); i++) {
-      var item = {};
-      if (keysRu[i]) {
-        item.characteristics_ru_name = keysRu[i];
-        item.characteristics_ru_value = this.data.ru[keysRu[i]];
+    if (this.data.length === 0) {
+      this.addFields();
+    } else {
+      var keysRu = Object.keys(this.data.ru);
+      var keysUz = Object.keys(this.data.uz);
+      for (var i = 0; i < Math.max(keysRu.length, keysUz.length); i++) {
+        var item = {};
+        if (keysRu[i]) {
+          item.characteristics_ru_name = keysRu[i];
+          item.characteristics_ru_value = this.data.ru[keysRu[i]];
+        }
+        if (keysUz[i]) {
+          item.characteristics_uz_name = keysUz[i];
+          item.characteristics_uz_value = this.data.uz[keysUz[i]];
+        }
+        this.fields.push(item);
       }
-      if (keysUz[i]) {
-        item.characteristics_uz_name = keysUz[i];
-        item.characteristics_uz_value = this.data.uz[keysUz[i]];
-      }
-      this.fields.push(item);
     }
+    // Если массив fields пуст, добавьте одно поле
   },
+
   methods: {
     addFields: function addFields() {
       this.fields.push({
@@ -17491,7 +17497,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ["files"],
   mounted: function mounted() {
     this.downloads = this.files;
-    console.log("component mounted");
+    console.log(" mcomponentounted");
   },
   methods: {
     addFile: function addFile() {
@@ -17726,7 +17732,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "text",
       "class": "form-control form-control-border",
       name: "characteristics_ru[]",
-      placeholder: "Названия"
+      placeholder: "Названия",
+      required: ""
     }, null, 8 /* PROPS */, _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.characteristics_ru_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "for": 'characteristics_ru_value_' + index
     }, "Значения (ru):", 8 /* PROPS */, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -17737,7 +17744,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "text",
       "class": "form-control form-control-border",
       name: "characteristics_ru_value[]",
-      placeholder: "Названия"
+      placeholder: "Названия",
+      required: ""
     }, null, 8 /* PROPS */, _hoisted_8), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.characteristics_ru_value]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "for": 'characteristics_uz_name_' + index
     }, "Название (uz):", 8 /* PROPS */, _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -17748,7 +17756,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "text",
       "class": "form-control form-control-border",
       name: "characteristics_uz[]",
-      placeholder: "Названия"
+      placeholder: "Названия",
+      required: ""
     }, null, 8 /* PROPS */, _hoisted_13), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.characteristics_uz_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "for": 'characteristics_uz_value_' + index
     }, "Значения (uz):", 8 /* PROPS */, _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -17759,7 +17768,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "text",
       "class": "form-control form-control-border",
       name: "characteristics_uz_value[]",
-      placeholder: "Названия"
+      placeholder: "Названия",
+      required: ""
     }, null, 8 /* PROPS */, _hoisted_16), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, field.characteristics_uz_value]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
@@ -17827,16 +17837,18 @@ var _hoisted_14 = {
   "class": "input-group-prepend"
 };
 var _hoisted_15 = ["onClick"];
-var _hoisted_16 = ["onClick"];
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_16 = ["href"];
+var _hoisted_17 = ["src"];
+var _hoisted_18 = ["onClick"];
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
   "class": "btn btn-outline-danger"
 }, " Удалить ", -1 /* HOISTED */);
-var _hoisted_18 = [_hoisted_17];
-var _hoisted_19 = {
+var _hoisted_20 = [_hoisted_19];
+var _hoisted_21 = {
   "class": "row"
 };
-var _hoisted_20 = {
+var _hoisted_22 = {
   "class": "col-sm-12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -17878,13 +17890,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.uploadFile(download);
       }
-    }, " Загузить ", 8 /* PROPS */, _hoisted_15)])], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, " Загузить ", 8 /* PROPS */, _hoisted_15)])], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      href: '/storage/' + download.path,
+      "class": "input-group-prepend mr-3",
+      target: "_blank"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: '/storage/' + download.path,
+      width: "50",
+      height: "50"
+    }, null, 8 /* PROPS */, _hoisted_17)], 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": "input-group-prepend",
       onClick: function onClick($event) {
         return $options.deleteFile(index);
       }
-    }, _hoisted_18, 8 /* PROPS */, _hoisted_16)])])]);
-  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, _hoisted_20, 8 /* PROPS */, _hoisted_18)])])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-primary",
     onClick: _cache[0] || (_cache[0] = function () {

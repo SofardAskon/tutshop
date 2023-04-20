@@ -29,6 +29,8 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('locale');
 
+Route::post('/order', [CommonController::class, 'createOrder'])->name('order');
+
 
 Route::prefix('admin')->group(function () {
     Route::resource('category', App\Http\Controllers\CategoryController::class);

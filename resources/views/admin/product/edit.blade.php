@@ -18,13 +18,6 @@
                                 @csrf
                                 @include('admin.product._form')
                             </form>
-                            <div class="row mt-3">
-
-                                @foreach ($product->downloads as $downloadItem)
-                                    <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
-                                        width="150" height="150" style="object-fit:cover;">
-                                @endforeach
-                            </div>
                         </div>
                     </div>
                 </div>

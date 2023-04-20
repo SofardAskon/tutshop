@@ -43,17 +43,16 @@
         <div class="category__container">
             <div class="category__body">
                 <div class="category__top">
-                    <h4 class="category__title">Категории</h4>
+                    <h4 class="category__title">{{ trans('common.categories') }}</h4>
                 </div>
-                <a href="" class="category__link">Смотреть все</a>
+                <a href="" class="category__link">{{ trans('common.see_all') }}</a>
                 <div class="category__items">
                     @foreach ($categories as $categoryItem)
                         <a href="/shop?categories={{ $categoryItem->id }}" class="category__item item-category">
                             <div class="item-category__image">
                                 @foreach ($categoryItem->downloads as $index => $downloadItem)
                                     @if ($index == 0)
-                                        <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="#"
-                                            width="70">
+                                        <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="#" width="70">
                                     @endif
                                 @endforeach
                             </div>
@@ -69,8 +68,8 @@
         <div class="product-section__container">
             <div class="product-section__body">
                 <div class="product-section__top">
-                    <div class="product-section__title">Новое поступление</div>
-                    <a href="{{ route('shop') }}" class="product-section__link">Смотреть все</a>
+                    <div class="product-section__title">{{ trans('common.new_arrival') }}</div>
+                    <a href="{{ route('shop') }}" class="product-section__link">{{ trans('common.see_all') }}</a>
                 </div>
                 <div class="products-items">
                     @foreach ($products as $index => $product)
@@ -79,16 +78,12 @@
                                 <a href="{{ route('product', $product->id) }}" class="item-product__image">
                                     @foreach ($product->downloads as $index => $downloadItem)
                                         @if ($index == 0)
-                                            <img class="item-product__img item-product__img_first"
-                                                src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
-                                                style="object-fit:cover;">
+                                            <img class="item-product__img item-product__img_first" src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" style="object-fit:cover;">
                                         @endif
                                     @endforeach
                                     @foreach ($product->downloads as $index => $downloadItem)
                                         @if ($index == 0)
-                                            <img class="item-product__img item-product__img_first"
-                                                src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
-                                                style="object-fit:cover;">
+                                            <img class="item-product__img item-product__img_first" src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" style="object-fit:cover;">
                                         @endif
                                     @endforeach
                                     @if ($product->old_price)
@@ -103,15 +98,15 @@
                                     {{-- <div class="item-product__subtitle">Куплено более 2100</div> --}}
                                     <div class="item-product__price price-product">
                                         <div class="price-product__current">{{ $product->price }} сум</div>
-                                        <div class="price-product__old">{{ $product->old_price }} сум</div>
+                                        @if ($product->old_price)
+                                            <div class="price-product__old">{{ $product->old_price }} сум</div>
+                                        @endif
                                     </div>
-                                    <a href="{{ route('product', $product->id) }}"
-                                        class="item-product__title">{{ $product->name }}</a>
+                                    <a href="{{ route('product', $product->id) }}" class="item-product__title">{{ $product->name }}</a>
                                     <div class="item-product__colors">
                                         {{-- <a href="" class="colors-item active"><span style="background-color: #000;"></span></a> --}}
                                         @foreach ($product->colors as $color)
-                                            <a href="#" class="colors-item"><span
-                                                    style="background-color: {{ $color->hex_code }};"></span></a>
+                                            <a href="#" class="colors-item"><span style="background-color: {{ $color->hex_code }};"></span></a>
                                         @endforeach
                                     </div>
                                     <div class="item-product__buttons">
@@ -136,8 +131,7 @@
                     <div class="banners-page__title banners-page__title_mt">Скидки на все</div>
                     <div class="banners-page__num">30%</div>
                     <picture>
-                        <source srcset="{{ asset('assets/img/banners/image1.webp') }}" type="image/webp"><img
-                            src="{{ asset('assets/img/banners/image1.jpg') }}" class="banners-page__image" alt="">
+                        <source srcset="{{ asset('assets/img/banners/image1.webp') }}" type="image/webp"><img src="{{ asset('assets/img/banners/image1.jpg') }}" class="banners-page__image" alt="">
                     </picture>
                 </a>
                 <a href="" class="banners-page__item">
@@ -145,8 +139,7 @@
                     <div class="banners-page__text">это замечательная возможность совершить выгодную покупку и
                         получить в качестве бонуса подарок или скидку</div>
                     <picture>
-                        <source srcset="{{ asset('assets/img/banners/image2.webp') }}" type="image/webp"><img
-                            src="{{ asset('assets/img/banners/image2.jpg') }}" class="banners-page__image" alt="">
+                        <source srcset="{{ asset('assets/img/banners/image2.webp') }}" type="image/webp"><img src="{{ asset('assets/img/banners/image2.jpg') }}" class="banners-page__image" alt="">
                     </picture>
                 </a>
             </div>
@@ -157,8 +150,8 @@
         <div class="product-section__container">
             <div class="product-section__body">
                 <div class="product-section__top">
-                    <div class="product-section__title">Товары со скидкой</div>
-                    <a href="{{ route('shop') }}" class="product-section__link">Смотреть все</a>
+                    <div class="product-section__title">{{ trans('common.items_on_sale') }}</div>
+                    <a href="{{ route('shop') }}" class="product-section__link">{{ trans('common.see_all') }}</a>
                 </div>
                 <div class="products-items">
                     @foreach ($products as $index => $product)
@@ -167,16 +160,12 @@
                                 <a href="{{ route('product', $product->id) }}" class="item-product__image">
                                     @foreach ($product->downloads as $index => $downloadItem)
                                         @if ($index == 0)
-                                            <img class="item-product__img item-product__img_first"
-                                                src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
-                                                style="object-fit:cover;">
+                                            <img class="item-product__img item-product__img_first" src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" style="object-fit:cover;">
                                         @endif
                                     @endforeach
                                     @foreach ($product->downloads as $index => $downloadItem)
                                         @if ($index == 0)
-                                            <img class="item-product__img item-product__img_first"
-                                                src="{{ asset('storage') . '/' . $downloadItem->path }}" alt=""
-                                                style="object-fit:cover;">
+                                            <img class="item-product__img item-product__img_first" src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" style="object-fit:cover;">
                                         @endif
                                     @endforeach
                                     @if ($product->old_price)
@@ -191,15 +180,15 @@
                                     {{-- <div class="item-product__subtitle">Куплено более 2100</div> --}}
                                     <div class="item-product__price price-product">
                                         <div class="price-product__current">{{ $product->price }} сум</div>
-                                        <div class="price-product__old">{{ $product->old_price }} сум</div>
+                                        @if ($product->old_price)
+                                            <div class="price-product__old">{{ $product->old_price }} сум</div>
+                                        @endif
                                     </div>
-                                    <a href="{{ route('product', $product->id) }}"
-                                        class="item-product__title">{{ $product->name }}</a>
+                                    <a href="{{ route('product', $product->id) }}" class="item-product__title">{{ $product->name }}</a>
                                     <div class="item-product__colors">
                                         {{-- <a href="" class="colors-item active"><span style="background-color: #000;"></span></a> --}}
                                         @foreach ($product->colors as $color)
-                                            <a href="#" class="colors-item"><span
-                                                    style="background-color: {{ $color->hex_code }};"></span></a>
+                                            <a href="#" class="colors-item"><span style="background-color: {{ $color->hex_code }};"></span></a>
                                         @endforeach
                                     </div>
                                     <div class="item-product__buttons">
@@ -243,7 +232,7 @@
             <div class="product-section__body">
                 <div class="product-section__top">
                     <div class="product-section__title">Вы смотрели</div>
-                    <a href="{{route('shop')}}" class="product-section__link">Смотреть все</a>
+                    <a href="{{route('shop')}}" class="product-section__link">{{ trans('common.see_all') }}</a>
                 </div>
                 <div class="products-items">
                     <article class="products-items__item item-product">

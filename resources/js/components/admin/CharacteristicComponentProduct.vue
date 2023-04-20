@@ -17,6 +17,7 @@
                     class="form-control form-control-border"
                     name="characteristics_ru[]"
                     placeholder="Названия"
+                    required
                 />
             </div>
             <div class="form-group">
@@ -30,6 +31,7 @@
                     class="form-control form-control-border"
                     name="characteristics_ru_value[]"
                     placeholder="Названия"
+                    required
                 />
             </div>
         </div>
@@ -45,6 +47,7 @@
                     class="form-control form-control-border"
                     name="characteristics_uz[]"
                     placeholder="Названия"
+                    required
                 />
             </div>
             <div class="form-group">
@@ -57,6 +60,7 @@
                     class="form-control form-control-border"
                     name="characteristics_uz_value[]"
                     placeholder="Названия"
+                    required
                 />
             </div>
         </div>
@@ -80,24 +84,29 @@ export default {
     },
     props: ["data"],
     mounted() {
-        const keysRu = Object.keys(this.data.ru);
-        const keysUz = Object.keys(this.data.uz);
+        if (this.data.length === 0) {
+            this.addFields();
+        } else {
+            const keysRu = Object.keys(this.data.ru);
+            const keysUz = Object.keys(this.data.uz);
 
-        for (let i = 0; i < Math.max(keysRu.length, keysUz.length); i++) {
-            const item = {};
+            for (let i = 0; i < Math.max(keysRu.length, keysUz.length); i++) {
+                const item = {};
 
-            if (keysRu[i]) {
-                item.characteristics_ru_name = keysRu[i];
-                item.characteristics_ru_value = this.data.ru[keysRu[i]];
+                if (keysRu[i]) {
+                    item.characteristics_ru_name = keysRu[i];
+                    item.characteristics_ru_value = this.data.ru[keysRu[i]];
+                }
+
+                if (keysUz[i]) {
+                    item.characteristics_uz_name = keysUz[i];
+                    item.characteristics_uz_value = this.data.uz[keysUz[i]];
+                }
+
+                this.fields.push(item);
             }
-
-            if (keysUz[i]) {
-                item.characteristics_uz_name = keysUz[i];
-                item.characteristics_uz_value = this.data.uz[keysUz[i]];
-            }
-
-            this.fields.push(item);
         }
+        // Если массив fields пуст, добавьте одно поле
     },
     methods: {
         addFields() {
