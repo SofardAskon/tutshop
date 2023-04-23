@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Filter;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class ProductController extends Controller
             'categories' => Category::with('children')->where('parent_id', null)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
+            'filters' => Filter::with('values')->get(),
             'delimiter' => ''
         ]);
     }
@@ -81,6 +83,15 @@ class ProductController extends Controller
             $product->downloads()->attach($request->downloads);
         }
 
+        $filters = Filter::all();
+
+        foreach ($filters as $filter) {
+            $filterValueId = $request->input('filter_' . $filter->id);
+            if ($filterValueId) {
+                $product->filters()->attach($filter->id, ['filter_value_id' => $filterValueId]);
+            }
+        }
+
         return redirect()->route('product.index');
     }
 
@@ -97,13 +108,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-
         // dd(json_encode($product->getTranslations('characteristics')));
         return view('admin.product.edit', [
             'product' => $product,
             'categories' => Category::with('children')->where('parent_id', null)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
+            'filters' => Filter::with('values')->get(),
             'delimiter' => ''
         ]);
     }
@@ -170,6 +181,16 @@ class ProductController extends Controller
             $product->downloads()->attach($request->downloads);
         }
 
+        $product->filters()->detach();
+        $filters = Filter::all();
+
+        foreach ($filters as $filter) {
+            $filterValueId = $request->input('filter_' . $filter->id);
+            if ($filterValueId) {
+                $product->filters()->attach($filter->id, ['filter_value_id' => $filterValueId]);
+            }
+        }
+
         return redirect()->route('product.index');
     }
 
@@ -178,6 +199,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $product->colors()->detach();
+        $product->sizes()->detach();
+        $product->filters()->detach();
         $product->categories()->detach();
         $product->downloads()->detach();
         $product->delete();

@@ -17,6 +17,9 @@
                 <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Характеристики</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-filters-tab" data-toggle="pill" href="#custom-tabs-one-filters" role="tab" aria-controls="custom-tabs-one-filters" aria-selected="false">Фильтра</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Картинки</a>
             </li>
         </ul>
@@ -97,6 +100,19 @@
                     <characteristic-component-product :data='[]'>
                     </characteristic-component-product>
                 @endif
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-one-filters" role="tabpanel" aria-labelledby="custom-tabs-one-filters-tab">
+                @foreach ($filters as $filter)
+                    <div class="form-group">
+                        <label for="filter_{{ $filter->id }}">{{ $filter->name }}</label>
+                        <select class="select2" name="filter_{{ $filter->id }}" id="filter_{{ $filter->id }}" data-placeholder="Выберите {{ $filter->name }}" style="width: 100%;">
+                            <option value=""></option>
+                            @foreach ($filter->values as $value)
+                                <option value="{{ $value->id }}" {{ $product->filters->contains($filter->id) && $product->filters->find($filter->id)->pivot->filter_value_id == $value->id ? 'selected' : '' }}>{{ $value->value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endforeach
             </div>
             <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
                 <upload-file-component :files='{{ $product->downloads ?? '[]' }}'></upload-file-component>

@@ -229,6 +229,29 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item {{ $routeName === 'filter' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'filter' ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-bag-shopping"></i>
+                                <p>
+                                    Фильтры
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('filter.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Фильтры</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('filter.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Добавить фильтр</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         {{-- <li class="nav-item">
                             <a href="{{ route('color.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>

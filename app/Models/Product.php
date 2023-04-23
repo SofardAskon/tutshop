@@ -33,4 +33,14 @@ class Product extends Model
     {
         return $this->morphToMany(Download::class, 'downloadable');
     }
+
+    public function filters()
+    {
+        return $this->belongsToMany(Filter::class, 'filter_product')->withPivot('filter_value_id');
+    }
+
+    public function filterValues()
+    {
+        return $this->belongsToMany(FilterValue::class);
+    }
 }

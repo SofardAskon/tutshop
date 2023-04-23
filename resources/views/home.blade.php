@@ -45,7 +45,7 @@
                 <div class="category__top">
                     <h4 class="category__title">{{ trans('common.categories') }}</h4>
                 </div>
-                <a href="" class="category__link">{{ trans('common.see_all') }}</a>
+                <a href="{{ route('shop') }}" class="category__link">{{ trans('common.see_all') }}</a>
                 <div class="category__items">
                     @foreach ($categories as $categoryItem)
                         <a href="/shop?categories={{ $categoryItem->id }}" class="category__item item-category">

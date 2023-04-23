@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <style>body{opacity: 0;}</style> -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css?_v=202304151322361') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css?v2.1') }}">
     <link rel="shortcut icon" href="favicon.ico">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,7 +126,8 @@
                 <div class="footer-header__container">
                     <div class="footer-header__categoty category-header" data-da=".menu__body,991.98,1">
                         <ul class="category-header__list">
-                            @include('_categories-header')
+                            {{-- @include('_categories-header') --}}
+                            <li>ㅤ</li>
                         </ul>
                     </div>
                 </div>
@@ -273,12 +274,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-
-
-            // Получаем CSRF-токен из мета-тега
             var token = $('meta[name="csrf-token"]').attr('content');
 
-            // Устанавливаем заголовок X-CSRF-TOKEN для AJAX-запросов
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -293,45 +290,52 @@
                 return decodeURI(results[1]) || null;
             }
 
+            function getSelectedFilters() {
+                let filters = {};
 
-            // Обработчик события при изменении значения фильтра
-            $('.checkbox, .options__input').on('change', function() {
-                // Получаем значения выбранных фильтров
-                // var category = $('#category-select').val();
+                $('.filters').each(function() {
+                    let filterId = $(this).data('filter-id');
+                    let selectedValues = $(this).find('input[type="checkbox"]:checked').map(function() {
+                        return $(this).val();
+                    }).get();
+
+                    if (selectedValues.length > 0) {
+                        filters[filterId] = selectedValues;
+                    }
+                });
+
+                return filters;
+            }
+
+            $('.checkbox, .options__input, .item-filter input[type="checkbox"]').on('change', function() {
                 var category = $.urlParam('categories');
-                var color = $('#color-select').val();
-
                 var selectedColors = [];
                 $('input[name="color[]"]:checked').each(function() {
                     selectedColors.push($(this).val());
                 });
-                // console.log(selectedColors);
 
                 var selectedSizes = [];
                 $('input[name="size[]"]:checked').each(function() {
                     selectedSizes.push($(this).val());
                 });
-                // console.log(selectedSizes);
 
-                var size = $('#size-select').val();
+                var selectedFilters = getSelectedFilters();
+                console.log(selectedFilters);
 
-                // Сохраняем параметры фильтра в URL
                 var url = window.location.pathname + '?categories=' + category + '&colors=' +
-                    selectedColors +
-                    '&sizes=' + selectedSizes;
+                    selectedColors + '&sizes=' + selectedSizes;
                 history.pushState({}, '', url);
 
-                // Отправляем POST-запрос на сервер для фильтрации продуктов
                 $.ajax({
                     url: '/category',
                     method: 'POST',
                     data: {
                         categories: category,
                         colors: JSON.stringify(selectedColors),
-                        sizes: JSON.stringify(selectedSizes)
+                        sizes: JSON.stringify(selectedSizes),
+                        filters: JSON.stringify(selectedFilters)
                     },
                     success: function(data) {
-                        // Обновляем список продуктов на странице
                         console.log(data.data);
                         $('#products').html(data.html);
                     },

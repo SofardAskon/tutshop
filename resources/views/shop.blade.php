@@ -67,6 +67,7 @@
 
                                 </div>
                             </div>
+                            @include('_filters')
                             {{-- <div class="filter__item item-filter">
                                 <button type="button" data-spoller class="item-filter__title _spoller-active">Обьем
                                     встроенной

@@ -21,8 +21,23 @@
     color: #fff;
 }
 
+.category-header__link {
+    white-space: nowrap;
+}
+
+.item-category__title {
+    font-size: 16px;
+    line-height: 120%;
+}
+
 @media (max-width: 812px) {
     .product-not-found {
         display: none;
+    }
+}
+
+@media (max-width: 29.99875em) {
+    .category__items {
+        grid-template-columns: repeat(auto-fit,minmax(8.375rem,1fr));
     }
 }

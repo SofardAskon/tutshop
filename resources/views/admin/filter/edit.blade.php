@@ -7,29 +7,17 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Категории</h1>
+                        <h1 class="m-0">Цвет</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <form action="{{ route('category.update', $category) }}" method="post">
+                            <form action="{{ route('filter.update', $filter) }}" method="post">
                                 @method('PUT')
                                 @csrf
-                                @include('admin.category._form')
+                                @include('admin.filter._form')
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card-body">
-                            <form id="delete-form-{{ $category->id }}" action="{{ route('category.destroy', $category) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                            <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $category->id }}').submit();">Удалить</a>
-
                         </div>
                     </div>
                 </div>

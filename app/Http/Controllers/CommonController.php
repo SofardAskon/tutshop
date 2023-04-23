@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Filter;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\Slider;
@@ -51,6 +52,7 @@ class CommonController extends Controller
             'categories' => Category::get(),
             'sizes' => Size::get(),
             'colors' => Color::get(),
+            'filters' => Filter::get(),
             'products' => $products
         ]);
     }
@@ -62,6 +64,7 @@ class CommonController extends Controller
         $categories = json_decode($request->input('categories'));
         $sizes = json_decode($request->input('sizes'));
         $colors = json_decode($request->input('colors'));
+        $filters = json_decode($request->input('filters'), true);
 
         // Создаем новый экземпляр запроса к модели Product
         $productsQuery = Product::query();
@@ -84,6 +87,22 @@ class CommonController extends Controller
             });
         }
 
+        if (!empty($filters)) {
+            foreach ($filters as $filterId => $filterValues) {
+                $productsQuery->whereHas('filters', function ($query) use ($filterId, $filterValues) {
+                    $query->where('filters.id', $filterId)
+                        ->whereIn('filter_product.filter_value_id', $filterValues);
+                });
+            }
+        }
+        // if (!empty($filters)) {
+        //     foreach ($filters as $filterId => $filterValues) {
+        //         $productsQuery->whereHas('filters', function ($query) use ($filterId, $filterValues) {
+        //             $query->where('filters.id', $filterId)
+        //                 ->whereIn('filter_product.filter_value_id', $filterValues);
+        //         });
+        //     }
+        // }
 
 
         // Получаем отфильтрованные продукты
@@ -93,7 +112,7 @@ class CommonController extends Controller
         $html = view('_productCard', compact('products'))->render();
 
         // Возвращаем HTML-шаблон в виде строки для обновления содержимого списка продуктов на странице
-        return response()->json(['html' => $html, 'data' => $sizes]);
+        return response()->json(['html' => $html, 'data' => '']);
     }
 
     public function product(Request $request)

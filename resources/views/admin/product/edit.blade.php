@@ -21,6 +21,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card-body">
+                            <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy', $product) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $product->id }}').submit();">Удалить</a>
+
+                        </div>
+                    </div>
+                </div>
                 <!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

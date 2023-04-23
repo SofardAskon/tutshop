@@ -39,4 +39,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('size', App\Http\Controllers\SizeController::class);
     Route::resource('slider', App\Http\Controllers\SliderController::class);
     Route::resource('download', App\Http\Controllers\Admin\DownloadController::class)->only('store', 'update', 'destroy');
+
+    Route::resource('filter', App\Http\Controllers\FilterController::class);
+    Route::resource('filter.values', App\Http\Controllers\FilterValueController::class)->shallow();
 });
