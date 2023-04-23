@@ -1,7 +1,12 @@
-<div class="form-group">
-    <label>Названия</label>
-    <input type="text" class="form-control form-control-border" name="title" value="{{ $category->title ?? '' }}"
-        placeholder="Названия">
+<div class="row">
+    <div class="form-group col-6">
+        <label>Названия (ru)</label>
+        <input type="text" class="form-control form-control-border" name="name_ru" value="{{ $category ? $category->getTranslation('title', 'ru') : '' }}" placeholder="Названия">
+    </div>
+    <div class="form-group col-6">
+        <label>Названия (uz)</label>
+        <input type="text" class="form-control form-control-border" name="name_uz" value="{{ $category ? $category->getTranslation('title', 'uz') : '' }}" placeholder="Названия">
+    </div>
 </div>
 <div class="form-group">
     <label>Родительская категория</label>
@@ -12,6 +17,8 @@
 </div>
 
 {{-- upload-file-component --}}
-{{-- <upload-file-component-category :files={{ $category->downloads ?? '[]' }}></upload-file-component-category> --}}
+
+<upload-file-component :files='{{ $category->downloads ?? '[]' }}'></upload-file-component>
+
 
 <button type="submit" class="btn btn-primary">Сохранить</button>

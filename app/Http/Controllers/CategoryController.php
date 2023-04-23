@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         return view('admin.category.create', [
             'category' => [],
-            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'categories' => Category::with('children')->where('parent_id', null)->get(),
             'delimiter' => ''
         ]);
     }
@@ -33,11 +33,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->except('downloads'));
+        $product = Category::create([
+            'title' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ]
+        ]);
 
-        // if ($request->has('downloads')) {
-        //     $request->downloads()->attach($request->downloads);
-        // }
+        // Category::create($request->except('downloads'));
+
+        if ($request->has('downloads')) {
+            $product->downloads()->attach($request->downloads);
+        }
 
         return redirect()->route('category.index');
     }
@@ -57,7 +64,7 @@ class CategoryController extends Controller
     {
         return view('admin.category.edit', [
             'category' => $category,
-            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'categories' => Category::with('children')->where('parent_id', null)->get(),
             'delimiter' => ''
         ]);
     }
@@ -67,12 +74,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->except('downloads'));
 
-        // $category->downloads()->detach();
-        // if ($request->has('downloads')) {
-        //     $category->downloads()->attach($request->downloads);
-        // }
+        $category->update([
+            'title' => [
+                'ru' => $request->name_ru,
+                'uz' => $request->name_uz,
+            ]
+        ]);
+
+        $category->downloads()->detach();
+        if ($request->has('downloads')) {
+            $category->downloads()->attach($request->downloads);
+        }
 
         return redirect()->route('category.index');
     }

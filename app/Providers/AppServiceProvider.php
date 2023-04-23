@@ -25,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function categoryLoad()
     {
+        // dd(\App\Models\Category::with('children')->where('parent_id', null)->get());
         View::composer(['layout', 'home'], function ($view) {
-            $view->with('categories', \App\Models\Category::with('children')->where('parent_id', 0)->get());
+            $view->with('categories', \App\Models\Category::with('children')->where('parent_id', null)->get());
         });
     }
 }

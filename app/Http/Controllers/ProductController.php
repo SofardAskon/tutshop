@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         return view('admin.product.create', [
             'product' => [],
-            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'categories' => Category::with('children')->where('parent_id', null)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
             'delimiter' => ''
@@ -101,7 +101,7 @@ class ProductController extends Controller
         // dd(json_encode($product->getTranslations('characteristics')));
         return view('admin.product.edit', [
             'product' => $product,
-            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'categories' => Category::with('children')->where('parent_id', null)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
             'delimiter' => ''
