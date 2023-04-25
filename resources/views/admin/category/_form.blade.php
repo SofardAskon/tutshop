@@ -16,6 +16,21 @@
     </select>
 </div>
 
+
+<div class="form-group">
+    <label>Фильтры</label>
+    <div class="select2-purple">
+        <select class="select2" name="filters[]" multiple="multiple" data-placeholder="Выберите цвет" data-dropdown-css-class="select2-purple" style="width: 100%;">
+            @foreach ($filters as $filter)
+                <option value="{{ $filter->id }}" {{ in_array($filter->id, $selectedFilters) ? 'selected' : '' }}>
+                    {{ $filter->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+
 {{-- upload-file-component --}}
 
 <upload-file-component :files='{{ $category->downloads ?? '[]' }}'></upload-file-component>

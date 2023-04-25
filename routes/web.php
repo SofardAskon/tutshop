@@ -22,6 +22,8 @@ Route::get('/', [CommonController::class, 'home'])->name('home');
 Route::get('/shop', [CommonController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [CommonController::class, 'product'])->name('product');
 Route::post('/category', [CommonController::class, 'filter'])->name('filter');
+Route::get('/shop/categories/{id}', [CommonController::class, 'categoryProducts'])->name('shop.category');
+
 
 Route::get('locale/{locale}', function ($locale) {
     Session::put('locale', $locale);
@@ -42,4 +44,5 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('filter', App\Http\Controllers\FilterController::class);
     Route::resource('filter.values', App\Http\Controllers\FilterValueController::class)->shallow();
+    Route::get('/get-filters/{category}', [App\Http\Controllers\FilterController::class, 'getFiltersByCategory'])->name('get.filters');
 });

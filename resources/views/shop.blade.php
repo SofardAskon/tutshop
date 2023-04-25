@@ -7,7 +7,7 @@
                 <div class="catalog-page__filter filter-catalog-page">
                     <ul class="filter-catalog-page__categoty">
                         @foreach ($categories as $categoryItem)
-                            <li class="filter-catalog-page__item-category" data-id="{{ $categoryItem->id }}"><a href="/shop?categories={{ $categoryItem->id }}">{{ $categoryItem->title }}</a>
+                            <li class="filter-catalog-page__item-category" data-id="{{ $categoryItem->id }}"><a href="{{ route('shop.category', ['id' => $categoryItem->id]) }}">{{ $categoryItem->title }}</a>
                             </li>
                         @endforeach
                     </ul>

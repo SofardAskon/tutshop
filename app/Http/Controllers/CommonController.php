@@ -46,6 +46,7 @@ class CommonController extends Controller
             });
         }
 
+
         $products = $products->get();
 
         return view('shop', [
@@ -56,6 +57,51 @@ class CommonController extends Controller
             'products' => $products
         ]);
     }
+
+    public function categoryProducts($id)
+    {
+        // Получаем категорию по ID
+        $category = Category::find($id);
+
+        // Если категория не найдена, возвращаем 404
+        if (!$category) {
+            abort(404);
+        }
+
+        // Если у выбранной категории есть родительская категория,
+        // то мы считаем, что выбрана подкатегория и устанавливаем родительскую категорию
+        if ($category->parent_id) {
+            $parentCategory = Category::find($category->parent_id);
+        } else {
+            $parentCategory = $category;
+        }
+
+        // Получаем продукты для заданной категории (или подкатегории)
+        $products = Product::query();
+
+        $products->whereHas('categories', function ($query) use ($id) {
+            $query->whereIn('categories.id', [$id]); // явно указываем имя таблицы для столбца 'id'
+        });
+
+        $products = $products->get();
+
+        // Получаем фильтры для родительской категории
+        $filters = $parentCategory->filters;
+
+        // Получаем все категории
+        $categories = Category::all();
+
+        // Получаем размеры
+        $sizes = Size::all();
+
+        // Получаем цвета
+        $colors = Color::all();
+
+        // Возвращаем представление с продуктами, фильтрами и категориями
+        return view('shop', compact('products', 'filters', 'category', 'parentCategory', 'categories', 'sizes', 'colors'));
+    }
+
+
 
     public function filter(Request $request)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,9 @@ class FilterController extends Controller
      */
     public function create()
     {
-        return view('admin.filter.create');
+        return view('admin.filter.create', [
+            'filter' => [],
+        ]);
     }
 
     /**
@@ -77,5 +80,13 @@ class FilterController extends Controller
     {
         $filter->delete();
         return redirect()->route('filter.index');
+    }
+
+    public function getFiltersByCategory(Category $category)
+    {
+        $mainCategory = $category->parent_id ? $category->parent : $category;
+        $filters = $mainCategory->filters;
+
+        return response()->json($filters);
     }
 }

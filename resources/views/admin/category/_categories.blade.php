@@ -1,13 +1,12 @@
 @foreach ($categories as $categoryItem)
-    <option value="{{ $categoryItem->id ?? '' }}"
-        @isset($category->id)
-            @if ($category->paret_id == $categoryItem->id)
-                selected=""
-            @endif
-            @if ($category->id == $categoryItem->id)
-                selected=""
-            @endif
-        @endisset>
+    @if (isset($category) && !empty($category) && $category->id == $categoryItem->id)
+        @continue
+    @endif
+    <option value="{{ $categoryItem->id ?? '' }}" @isset($category->parent_id)
+        @if ($category->parent_id == $categoryItem->id)
+            selected
+        @endif
+    @endisset>
         {{ $delimiter ?? '' }}{{ $categoryItem->title ?? '' }}
     </option>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Filter;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,7 +24,9 @@ class CategoryController extends Controller
     {
         return view('admin.category.create', [
             'category' => [],
-            'categories' => Category::with('children')->where('parent_id', null)->get(),
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'filters' => Filter::get(),
+            'selectedFilters' => [],
             'delimiter' => ''
         ]);
     }
@@ -33,17 +36,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Category::create([
+        $category = Category::create([
             'title' => [
                 'ru' => $request->name_ru,
                 'uz' => $request->name_uz,
-            ]
+            ],
+            'parent_id' => $request->parent_id
         ]);
 
         // Category::create($request->except('downloads'));
 
+        if ($request->has('filters')) {
+            $category->filters()->attach($request->filters);
+        }
+
         if ($request->has('downloads')) {
-            $product->downloads()->attach($request->downloads);
+            $category->downloads()->attach($request->downloads);
         }
 
         return redirect()->route('category.index');
@@ -64,7 +72,9 @@ class CategoryController extends Controller
     {
         return view('admin.category.edit', [
             'category' => $category,
-            'categories' => Category::with('children')->where('parent_id', null)->get(),
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'filters' => Filter::get(),
+            'selectedFilters' => $category ? $category->filters->pluck('id')->toArray() : [], // Получить связанные фильтры для текущей категории
             'delimiter' => ''
         ]);
     }
@@ -79,8 +89,14 @@ class CategoryController extends Controller
             'title' => [
                 'ru' => $request->name_ru,
                 'uz' => $request->name_uz,
-            ]
+            ],
+            'parent_id' => $request->parent_id
         ]);
+
+        $category->filters()->detach();
+        if ($request->has('filters')) {
+            $category->filters()->attach($request->filters);
+        }
 
         $category->downloads()->detach();
         if ($request->has('downloads')) {
@@ -97,6 +113,7 @@ class CategoryController extends Controller
     {
         $category->delete();
         $category->downloads()->detach();
+        $category->filters()->detach();
         return redirect()->route('category.index');
     }
 }

@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filter_values', function (Blueprint $table) {
-            $table->id();
+        Schema::create('category_filter', function (Blueprint $table) {
+            $table->unsignedInteger('category_id');
             $table->unsignedBigInteger('filter_id');
-            $table->string('value');
             $table->timestamps();
 
-            $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');
+            $table->foreign('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('cascade');
+
+            $table->foreign('filter_id')
+                ->references('id')->on('filters')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filter_values');
+        Schema::dropIfExists('category_filter');
     }
 };

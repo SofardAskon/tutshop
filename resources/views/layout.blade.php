@@ -282,6 +282,12 @@
                 }
             });
 
+            function getCategoryIdFromUrl() {
+                const regex = /\/shop\/categories\/(\d+)/;
+                const match = window.location.pathname.match(regex);
+                return match ? match[1] : null;
+            }
+
             $.urlParam = function(name) {
                 var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
                 if (!results) {
@@ -308,7 +314,8 @@
             }
 
             $('.checkbox, .options__input, .item-filter input[type="checkbox"]').on('change', function() {
-                var category = $.urlParam('categories');
+                var category = getCategoryIdFromUrl();
+                // var category = $.urlParam('categories');
                 var selectedColors = [];
                 $('input[name="color[]"]:checked').each(function() {
                     selectedColors.push($(this).val());
@@ -322,8 +329,20 @@
                 var selectedFilters = getSelectedFilters();
                 console.log(selectedFilters);
 
-                var url = window.location.pathname + '?categories=' + category + '&colors=' +
-                    selectedColors + '&sizes=' + selectedSizes;
+                var url = window.location.pathname;
+
+                if (category) {
+                    url += '?categories=' + category;
+                }
+
+                if (selectedColors.length > 0) {
+                    url += (url.includes('?') ? '&' : '?') + 'colors=' + selectedColors.join(',');
+                }
+
+                if (selectedSizes.length > 0) {
+                    url += (url.includes('?') ? '&' : '?') + 'sizes=' + selectedSizes.join(',');
+                }
+
                 history.pushState({}, '', url);
 
                 $.ajax({

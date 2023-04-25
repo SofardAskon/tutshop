@@ -23,7 +23,8 @@ class FilterValueController extends Controller
      */
     public function create(Filter $filter)
     {
-        return view('admin.filter_values.create', compact('filter'));
+        $filterValue = [];
+        return view('admin.filter_values.create', compact('filter', 'filterValue'));
     }
 
     /**

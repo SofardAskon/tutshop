@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('filter_value_id')->references('id')->on('filter.values')->onDelete('cascade');
+            $table->foreign('filter_value_id')->references('id')->on('filter_values')->onDelete('cascade');
         });
     }
 

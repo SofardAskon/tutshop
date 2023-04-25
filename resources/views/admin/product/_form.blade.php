@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group">
                     <label>Родительская категория</label>
-                    <select class="custom-select rounded-0" name="categories[]" multiple>
+                    <select id="category" class="custom-select rounded-0" name="categories[]" multiple>
                         @include('admin.product._categories')
                     </select>
                 </div>
@@ -108,7 +108,11 @@
                         <select class="select2" name="filter_{{ $filter->id }}" id="filter_{{ $filter->id }}" data-placeholder="Выберите {{ $filter->name }}" style="width: 100%;">
                             <option value=""></option>
                             @foreach ($filter->values as $value)
-                                <option value="{{ $value->id }}" {{ $product->filters->contains($filter->id) && $product->filters->find($filter->id)->pivot->filter_value_id == $value->id ? 'selected' : '' }}>{{ $value->value }}</option>
+                                @if (!empty($product))
+                                    <option value="{{ $value->id }}" {{ $product->filters->contains($filter->id) && $product->filters->find($filter->id)->pivot->filter_value_id == $value->id ? 'selected' : '' }}>{{ $value->value }}</option>
+                                @else
+                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -126,3 +130,49 @@
 
 
 <button type="submit" class="btn btn-primary">Сохранить</button>
+
+
+<!-- -->
+
+@section('scripts')
+    <script>
+        // $('#category').on('change', function() {
+        //     let categoryId = $(this).val();
+
+        //     $.ajax({
+        //         url: '{{ route('get.filters', '') }}/' + categoryId,
+        //         method: 'GET',
+        //         success: function(response) {
+        //             let filters = response;
+
+        //             // Очистить контейнер фильтров перед добавлением новых фильтров
+        //             $('#filters-container').html('');
+
+        //             if (filters && Array.isArray(filters)) {
+        //                 filters.forEach(function(filter) {
+        //                     let filterId = filter.id;
+        //                     let filterName = filter.name.ru; // Используйте filter.name.ru для русского языка или filter.name.uz для узбекского
+
+        //                     let filterElement = `
+    //                 <div class="form-group">
+    //                     <label for="filter_${filterId}">${filterName}</label>
+    //                     <select class="select2" name="filter_${filterId}" id="filter_${filterId}" data-placeholder="Выберите ${filterName}" style="width: 100%;">
+    //                     </select>
+    //                 </div>
+    //             `;
+
+        //                     $('#filters-container').html(filterElement);
+
+        //                     // Здесь добавьте код для заполнения списка значений фильтров, если они доступны
+        //                 });
+        //             }
+        //         },
+        //         error: function(error) {
+        //             console.error('Ошибка получения фильтров для категории:', error);
+        //         }
+        //     });
+        // });
+    </script>
+@endsection
+
+<!-- -->

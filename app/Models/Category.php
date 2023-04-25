@@ -24,4 +24,9 @@ class Category extends Model
     {
         return $this->morphToMany(Download::class, 'downloadable');
     }
+
+    public function filters()
+    {
+        return $this->belongsToMany(Filter::class);
+    }
 }

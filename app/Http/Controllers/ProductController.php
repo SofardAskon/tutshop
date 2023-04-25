@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         return view('admin.product.create', [
             'product' => [],
-            'categories' => Category::with('children')->where('parent_id', null)->get(),
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
             'filters' => Filter::with('values')->get(),
@@ -72,7 +72,7 @@ class ProductController extends Controller
         }
 
         if ($request->has('colors')) {
-            $product->colors()->attach($request->colors);
+            $product->colors()->sync($request->colors);
         }
 
         if ($request->has('sizes')) {
@@ -111,7 +111,7 @@ class ProductController extends Controller
         // dd(json_encode($product->getTranslations('characteristics')));
         return view('admin.product.edit', [
             'product' => $product,
-            'categories' => Category::with('children')->where('parent_id', null)->get(),
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),
             'sizes' => Size::get(),
             'filters' => Filter::with('values')->get(),

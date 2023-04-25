@@ -350,6 +350,8 @@
             background: #000 !important;
         }
     </style>
+
+    @yield('scripts')
 </body>
 
 </html>
