@@ -33,8 +33,9 @@
     <section class="discounts-small">
         <div class="discounts-small__container">
             <div class="discounts-small__body">
-                <div class="discounts-small__item">10% скидка на одежду </div>
-                <div class="discounts-small__item">дополнительная скидка 20%</div>
+                @foreach ($offers as $offer)
+                    <div class="discounts-small__item">{{ $offer->text }}</div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -48,7 +49,7 @@
                 <a href="{{ route('shop') }}" class="category__link">{{ trans('common.see_all') }}</a>
                 <div class="category__items">
                     @foreach ($categories as $categoryItem)
-                        <a href="/shop?categories={{ $categoryItem->id }}" class="category__item item-category">
+                        <a href="{{ route('shop.category', ['id' => $categoryItem->id]) }}" class="category__item item-category">
                             <div class="item-category__image">
                                 @foreach ($categoryItem->downloads as $index => $downloadItem)
                                     @if ($index == 0)
@@ -126,22 +127,18 @@
     <section class="page__banners banners-page">
         <div class="banners-page__container">
             <div class="banners-page__body">
-                <a href="" class="banners-page__item">
-                    <div class="banners-page__title">Одежда</div>
-                    <div class="banners-page__title banners-page__title_mt">Скидки на все</div>
-                    <div class="banners-page__num">30%</div>
-                    <picture>
-                        <source srcset="{{ asset('assets/img/banners/image1.webp') }}" type="image/webp"><img src="{{ asset('assets/img/banners/image1.jpg') }}" class="banners-page__image" alt="">
-                    </picture>
-                </a>
-                <a href="" class="banners-page__item">
-                    <div class="banners-page__title">Акция на аксессуары Apple</div>
-                    <div class="banners-page__text">это замечательная возможность совершить выгодную покупку и
-                        получить в качестве бонуса подарок или скидку</div>
-                    <picture>
-                        <source srcset="{{ asset('assets/img/banners/image2.webp') }}" type="image/webp"><img src="{{ asset('assets/img/banners/image2.jpg') }}" class="banners-page__image" alt="">
-                    </picture>
-                </a>
+                @foreach ($banner as $bannerItem)
+                    <a href="{{ $bannerItem->url }}" class="banners-page__item">
+                        <div class="banners-page__title">{{ $bannerItem->title }}</div>
+                        <div class="banners-page__text">{{ $bannerItem->description }}</div>
+                        @foreach ($bannerItem->downloads as $index => $downloadItem)
+                            @if ($index == 0)
+                                <img src="{{ asset('storage') . '/' . $downloadItem->path }}" alt="" class="banners-page__image">
+                            @endif
+                        @endforeach
+                    </a>
+                @endforeach
+
             </div>
         </div>
     </section>

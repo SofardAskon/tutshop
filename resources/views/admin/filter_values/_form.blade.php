@@ -7,8 +7,8 @@
                 <input type="text" class="form-control form-control-border" name="value_ru" value="{{ $filterValue ? $filterValue->getTranslation('value', 'ru') : '' }}" placeholder="Названия (ru)">
             </div>
             <div class="form-group">
-                <label>Названия (ru)</label>
-                <input type="text" class="form-control form-control-border" name="value_uz" value="{{ $filterValue ? $filterValue->getTranslation('value', 'uz') : '' }}" placeholder="Названия (ru)">
+                <label>Названия (uz)</label>
+                <input type="text" class="form-control form-control-border" name="value_uz" value="{{ $filterValue ? $filterValue->getTranslation('value', 'uz') : '' }}" placeholder="Названия (uz)">
             </div>
         </div>
     </div>

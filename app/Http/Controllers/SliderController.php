@@ -41,6 +41,7 @@ class SliderController extends Controller
                 'ru' => $request->description_ru,
                 'uz' => $request->description_uz,
             ],
+            'type' => $request->type,
             'url' => $request->url
         ]);
 
@@ -84,6 +85,7 @@ class SliderController extends Controller
                 'ru' => $request->description_ru,
                 'uz' => $request->description_uz,
             ],
+            'type' => $request->type,
             'url' => $request->url
         ]);
 
@@ -100,6 +102,7 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        //
+        $slider->downloads()->detach();
+        $slider->delete();
     }
 }

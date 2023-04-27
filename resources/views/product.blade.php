@@ -90,20 +90,6 @@
                                 @endisset
                             </div>
                         </div>
-                        @if (sizeof($product->sizes) > 0)
-                            <div class="price-main-product__sizes sizes-main-product">
-                                <div class="sizes-main-product__title">{{ trans('common.size') }}:</div>
-                                <div class="sizes-main-product__items">
-                                    @foreach ($product->sizes as $index => $sizeItem)
-                                        <div class="checkbox checkbox_size" data-size-name="{{ $sizeItem->name }}">
-                                            <input id="y_{{ $index }}" class="checkbox__input" type="radio" value="{{ $sizeItem->name }}" name="size">
-                                            <label for="y_{{ $index }}" class="checkbox__label"><span class="checkbox__text">{{ $sizeItem->name }}</span></label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="sizes-main-product__btn" data-popup="#popup_size">{{ trans('common.size_chart') }}</button>
-                            </div>
-                        @endif
                         <div class="price-main-product__buttons buttons-main-product">
                             <div class="buttons-main-product__main">
                                 <button id="open_popup" class="button" style="width: 100%;">{{ trans('common.buy') }}</button>

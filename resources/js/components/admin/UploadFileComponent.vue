@@ -54,6 +54,7 @@
                         </div>
                     </template>
                     <a
+                        v-if="download.path"
                         :href="'/storage/' + download.path"
                         class="input-group-prepend mr-3"
                         target="_blank"

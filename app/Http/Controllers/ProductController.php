@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Filter;
 use App\Models\Product;
-use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -30,7 +29,6 @@ class ProductController extends Controller
             'product' => [],
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),
-            'sizes' => Size::get(),
             'filters' => Filter::with('values')->get(),
             'delimiter' => ''
         ]);
@@ -41,7 +39,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // $product = Product::create($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
 
         $validatedData = $request->validate([
             'name_ru' => 'required|string|max:255',
@@ -73,10 +70,6 @@ class ProductController extends Controller
 
         if ($request->has('colors')) {
             $product->colors()->sync($request->colors);
-        }
-
-        if ($request->has('sizes')) {
-            $product->colors()->attach($request->sizes);
         }
 
         if ($request->has('categories')) {
@@ -113,7 +106,6 @@ class ProductController extends Controller
             'product' => $product,
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
             'colors' => Color::get(),
-            'sizes' => Size::get(),
             'filters' => Filter::with('values')->get(),
             'delimiter' => ''
         ]);
@@ -157,7 +149,6 @@ class ProductController extends Controller
             'price' => $request->price,
             'old_price' => $request->old_price,
         ]);
-        // $product->update($request->except('categories', 'downloads', 'files', 'colors', 'sizes'));
 
 
         $product->categories()->detach();
@@ -169,11 +160,6 @@ class ProductController extends Controller
         $product->colors()->detach();
         if ($request->has('colors')) {
             $product->colors()->attach($request->colors);
-        }
-
-        $product->sizes()->detach();
-        if ($request->has('sizes')) {
-            $product->sizes()->attach($request->sizes);
         }
 
         $product->downloads()->detach();
@@ -200,7 +186,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->colors()->detach();
-        $product->sizes()->detach();
         $product->filters()->detach();
         $product->categories()->detach();
         $product->downloads()->detach();

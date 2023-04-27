@@ -183,34 +183,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item {{ $routeName === 'size' ? 'nav-item menu-is-opening menu-open active' : '' }}">
-                            <a href="#" class="nav-link {{ $routeName === 'size' ? 'active' : '' }}">
-                                <i class="nav-icon fa-solid fa-bag-shopping"></i>
-                                <p>
-                                    Размеры
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('size.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Размеры</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('size.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Добавить размер</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item {{ $routeName === 'slider' ? 'nav-item menu-is-opening menu-open active' : '' }}">
                             <a href="#" class="nav-link {{ $routeName === 'slider' ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-bag-shopping"></i>
                                 <p>
-                                    Слайдер
+                                    Слайдер/Банеры
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -218,13 +195,36 @@
                                 <li class="nav-item">
                                     <a href="{{ route('slider.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Слайдеры</p>
+                                        <p>Слайдеры/Банеры</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('slider.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Добавить слайд</p>
+                                        <p>Добавить слайд/банер</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item {{ $routeName === 'offer' ? 'nav-item menu-is-opening menu-open active' : '' }}">
+                            <a href="#" class="nav-link {{ $routeName === 'offer' ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-bag-shopping"></i>
+                                <p>
+                                    Офферы
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('offer.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Офферы</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('offer.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Добавить офер</p>
                                     </a>
                                 </li>
                             </ul>

@@ -17890,7 +17890,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.uploadFile(download);
       }
-    }, " Загузить ", 8 /* PROPS */, _hoisted_15)])], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, " Загузить ", 8 /* PROPS */, _hoisted_15)])], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), download.path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      key: 1,
       href: '/storage/' + download.path,
       "class": "input-group-prepend mr-3",
       target: "_blank"
@@ -17898,7 +17899,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       src: '/storage/' + download.path,
       width: "50",
       height: "50"
-    }, null, 8 /* PROPS */, _hoisted_17)], 8 /* PROPS */, _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, null, 8 /* PROPS */, _hoisted_17)], 8 /* PROPS */, _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": "input-group-prepend",
       onClick: function onClick($event) {
         return $options.deleteFile(index);

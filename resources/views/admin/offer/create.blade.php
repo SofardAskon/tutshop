@@ -7,16 +7,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Размер</h1>
+                        <h1 class="m-0">Новый оффер</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <form action="{{ route('size.update', $size) }}" method="post">
-                                @method('PUT')
+                            <form action="{{ route('offer.store') }}" method="post">
                                 @csrf
-                                @include('admin.size._form')
+                                @include('admin.offer._form')
                             </form>
                         </div>
                     </div>

@@ -12,21 +12,16 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline"
-                            aria-describedby="example2_info">
+                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                             <thead>
                                 <tr>
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-sort="ascending"
-                                        aria-label="Rendering engine: activate to sort column descending">id
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">id
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-label="Browser: activate to sort column ascending">Названия</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-label="Browser: activate to sort column ascending">Изображения
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Названия</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Тип</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Изображения
                                     </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                        colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                         Действия</th>
                                 </tr>
                             </thead>
@@ -35,10 +30,10 @@
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">{{ $slider->id }}</td>
                                         <td>{{ $slider->getTranslation('title', 'ru') }}</td>
+                                        <td>{{ $slider->type == 'slider' ? 'Слайд' : 'Банер' }}</td>
                                         @foreach ($slider->downloads as $index => $downloadItem)
                                             @if ($index == 0)
-                                                <td
-                                                    style="background: url({{ asset('storage') . '/' . $downloadItem->path }}) no-repeat; background-size: cover; height: 150px;">
+                                                <td style="background: url({{ asset('storage') . '/' . $downloadItem->path }}) no-repeat; background-size: cover; height: 150px;">
                                                 </td>
                                             @endif
                                         @endforeach

@@ -73,9 +73,9 @@
                         </div>
                         <button class="body-header__catalog catalog-btn _icon-catalog">{{ trans('common.catalog') }}</button>
                         <div class="body-header__search search-header">
-                            <form action="#" class="search-header__form">
-                                <button type="button" class="_icon-search"></button>
-                                <input autocomplete="off" type="text" name="form[]" placeholder="{{ trans('common.search') }}" class="">
+                            <form action="{{ route('search') }}" method="GET" class="search-header__form">
+                                <button type="submit" class="_icon-search"></button>
+                                <input autocomplete="off" type="text" name="query" placeholder="{{ trans('common.search') }}" value="{{ $searchQuery ?? '' }}" class="">
                             </form>
                         </div>
                         <div class="body-header__language language-header" data-da=".menu__top,991.98,first">
@@ -321,11 +321,6 @@
                     selectedColors.push($(this).val());
                 });
 
-                var selectedSizes = [];
-                $('input[name="size[]"]:checked').each(function() {
-                    selectedSizes.push($(this).val());
-                });
-
                 var selectedFilters = getSelectedFilters();
                 console.log(selectedFilters);
 
@@ -339,10 +334,6 @@
                     url += (url.includes('?') ? '&' : '?') + 'colors=' + selectedColors.join(',');
                 }
 
-                if (selectedSizes.length > 0) {
-                    url += (url.includes('?') ? '&' : '?') + 'sizes=' + selectedSizes.join(',');
-                }
-
                 history.pushState({}, '', url);
 
                 $.ajax({
@@ -351,7 +342,6 @@
                     data: {
                         categories: category,
                         colors: JSON.stringify(selectedColors),
-                        sizes: JSON.stringify(selectedSizes),
                         filters: JSON.stringify(selectedFilters)
                     },
                     success: function(data) {

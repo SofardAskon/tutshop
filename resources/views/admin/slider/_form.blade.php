@@ -1,44 +1,48 @@
-<div class="col-6">
+<div class="col">
 
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <div class="form-group">
                 <label>Названия (ru)</label>
-                <input type="text" class="form-control form-control-border" name="title_ru"
-                    value="{{ $slider ? $slider->getTranslation('title', 'ru') : '' }}" placeholder="Названия (ru)">
+                <input type="text" class="form-control form-control-border" name="title_ru" value="{{ $slider ? $slider->getTranslation('title', 'ru') : '' }}" placeholder="Названия (ru)">
             </div>
         </div>
-        <div class="col">
+        <div class="col-6">
             <div class="form-group">
                 <label>Названия (uz)</label>
-                <input type="text" class="form-control form-control-border" name="title_uz"
-                    value="{{ $slider ? $slider->getTranslation('title', 'uz') : '' }}" placeholder="Названия (uz)">
+                <input type="text" class="form-control form-control-border" name="title_uz" value="{{ $slider ? $slider->getTranslation('title', 'uz') : '' }}" placeholder="Названия (uz)">
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <div class="form-group">
                 <label>Краткое описание (ru)</label>
-                <input type="text" class="form-control form-control-border" name="description_ru"
-                    value="{{ $slider ? $slider->getTranslation('description', 'ru') : '' }}"
-                    placeholder="Краткое описание (ru)">
+                <input type="text" class="form-control form-control-border" name="description_ru" value="{{ $slider ? $slider->getTranslation('description', 'ru') : '' }}" placeholder="Краткое описание (ru)">
             </div>
         </div>
-        <div class="col">
+        <div class="col-6">
             <div class="form-group">
                 <label>Краткое описание (uz)</label>
-                <input type="text" class="form-control form-control-border" name="description_uz"
-                    value="{{ $slider ? $slider->getTranslation('description', 'uz') : '' }}"
-                    placeholder="Краткое описание (uz)">
+                <input type="text" class="form-control form-control-border" name="description_uz" value="{{ $slider ? $slider->getTranslation('description', 'uz') : '' }}" placeholder="Краткое описание (uz)">
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Тип сущности</label>
+                <select id="category" class="custom-select rounded-0" name="type">
+                    <option value="slider" {{ !empty($slider->type) && $slider->type == 'slider' ? 'selected' : '' }}>Слайдер</option>
+                    <option value="banner" {{ !empty($slider->type) && $slider->type == 'banner' ? 'selected' : '' }}>Банер</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
         <div class="form-group">
             <label>URL</label>
-            <input type="text" class="form-control form-control-border" name="url"
-                value="{{ $slider->url ?? '' }}" placeholder="URL">
+            <input type="text" class="form-control form-control-border" name="url" value="{{ $slider->url ?? '' }}" placeholder="URL">
         </div>
     </div>
 </div>

@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
+use App\Traits\HasTranslationsFixed;
 
 class Product extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslationsFixed;
 
     protected $guarded = [];
 
@@ -22,11 +22,6 @@ class Product extends Model
     public function colors()
     {
         return $this->belongsToMany(Color::class);
-    }
-
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class);
     }
 
     public function downloads()

@@ -7,19 +7,33 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Размер</h1>
+                        <h1 class="m-0">Цвет</h1>
                     </div><!-- /.col -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <form action="{{ route('size.store') }}" method="post">
+                            <form action="{{ route('offer.update', $offer) }}" method="post">
+                                @method('PUT')
                                 @csrf
-                                @include('admin.size._form')
+                                @include('admin.offer._form')
                             </form>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card-body">
+                            <form id="delete-form-{{ $offer->id }}" action="{{ route('offer.destroy', $offer) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit">Удалить</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
                 <!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

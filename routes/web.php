@@ -23,6 +23,8 @@ Route::get('/shop', [CommonController::class, 'shop'])->name('shop');
 Route::get('/shop/{id}', [CommonController::class, 'product'])->name('product');
 Route::post('/category', [CommonController::class, 'filter'])->name('filter');
 Route::get('/shop/categories/{id}', [CommonController::class, 'categoryProducts'])->name('shop.category');
+Route::get('/search', [CommonController::class, 'search_products'])->name('search');
+
 
 
 Route::get('locale/{locale}', function ($locale) {
@@ -38,8 +40,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('category', App\Http\Controllers\CategoryController::class);
     Route::resource('product', App\Http\Controllers\ProductController::class);
     Route::resource('color', App\Http\Controllers\ColorController::class);
-    Route::resource('size', App\Http\Controllers\SizeController::class);
     Route::resource('slider', App\Http\Controllers\SliderController::class);
+    Route::resource('offer', App\Http\Controllers\OfferController::class);
     Route::resource('download', App\Http\Controllers\Admin\DownloadController::class)->only('store', 'update', 'destroy');
 
     Route::resource('filter', App\Http\Controllers\FilterController::class);

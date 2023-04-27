@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Filter;
+use App\Models\Offer;
 use App\Models\Product;
-use App\Models\Size;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,9 @@ class CommonController extends Controller
     public function home()
     {
         return view('home', [
-            'slider' => Slider::get(),
+            'slider' => Slider::where('type', 'slider')->get(),
+            'banner' => Slider::where('type', 'banner')->get(),
+            'offers' => Offer::get(),
             'products' => Product::get(),
         ]);
     }
@@ -39,19 +41,11 @@ class CommonController extends Controller
             });
         }
 
-        if ($request->has('sizes') && $request->sizes !== null) {
-            $sizes = explode(',', $request->sizes);
-            $products->whereHas('sizes', function ($query) use ($sizes) {
-                $query->whereIn('sizes.id', $sizes); // явно указываем имя таблицы для столбца 'id'
-            });
-        }
-
 
         $products = $products->get();
 
         return view('shop', [
             'categories' => Category::get(),
-            'sizes' => Size::get(),
             'colors' => Color::get(),
             'filters' => Filter::get(),
             'products' => $products
@@ -91,14 +85,11 @@ class CommonController extends Controller
         // Получаем все категории
         $categories = Category::all();
 
-        // Получаем размеры
-        $sizes = Size::all();
-
         // Получаем цвета
         $colors = Color::all();
 
         // Возвращаем представление с продуктами, фильтрами и категориями
-        return view('shop', compact('products', 'filters', 'category', 'parentCategory', 'categories', 'sizes', 'colors'));
+        return view('shop', compact('products', 'filters', 'category', 'parentCategory', 'categories', 'colors'));
     }
 
 
@@ -108,7 +99,6 @@ class CommonController extends Controller
         // Получаем выбранные параметры фильтрации
         // $category = json_decode($request->input('category'));
         $categories = json_decode($request->input('categories'));
-        $sizes = json_decode($request->input('sizes'));
         $colors = json_decode($request->input('colors'));
         $filters = json_decode($request->input('filters'), true);
 
@@ -124,12 +114,6 @@ class CommonController extends Controller
         if (!empty($colors)) {
             $productsQuery->whereHas('colors', function ($query) use ($colors) {
                 $query->whereIn('colors.id', $colors); // явно указываем имя таблицы для столбца 'id'
-            });
-        }
-
-        if (!empty($sizes)) {
-            $productsQuery->whereHas('sizes', function ($query) use ($sizes) {
-                $query->whereIn('sizes.id', $sizes); // явно указываем имя таблицы для столбца 'id'
             });
         }
 
@@ -176,7 +160,6 @@ class CommonController extends Controller
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $color = $_POST['color'];
-        $size = $_POST['size'];
         $url = $_POST['url'];
 
         $token = "5460979120:AAFnQ-wSdeNfLRi4mVlHDBOsblFEUE183mQ";
@@ -188,7 +171,6 @@ class CommonController extends Controller
             'Имя: ' => $name,
             'Телефон: ' => $phone,
             'Цвет: ' => $color,
-            'Размер: ' => $size,
             'Ссылка на сам продукт: ' => $url,
         );
 
@@ -200,5 +182,19 @@ class CommonController extends Controller
         $sendToTelegram = fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}", "r");
 
         return redirect()->back()->with('order_status', 'Ahhha');
+    }
+
+    public function search_products(Request $request)
+    {
+        $searchQuery = request()->input('query', '');
+
+
+        $categories = Category::with('children')->where('parent_id', 0)->get();
+
+        $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchQuery . '%')
+            ->get();
+
+        return view('search_products', compact('products', 'categories', 'searchQuery'));
     }
 }

@@ -3,10 +3,10 @@
     <ul class="spollers-sub__body">
         @isset($category->children)
             @foreach ($category->children as $categoryChildren)
-                <li class="spollers-sub__line"><a href="/shop?categories={{ $categoryChildren->id }}">{{ $categoryChildren->title }}</a></li>
+                <li class="spollers-sub__line"><a href="{{ route('shop.category', ['id' => $categoryChildren->id]) }}">{{ $categoryChildren->title }}</a></li>
 
                 @foreach ($categoryChildren->children as $categoryChildrenThree)
-                    <li class="spollers-sub__line"><a href="/shop?categories={{ $categoryChildrenThree->id }}">{{ $categoryChildrenThree->title }}</a>
+                    <li class="spollers-sub__line"><a href="{{ route('shop.category', ['id' => $categoryChildrenThree->id]) }}">{{ $categoryChildrenThree->title }}</a>
                     </li>
                 @endforeach
             @endforeach

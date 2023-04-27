@@ -2,6 +2,17 @@
     position: relative;
 }
 
+.banners-page__item {
+    /* max-height: 410px;
+    height: 100%; */
+}
+
+.banners-page__item img {
+    /* width: 100%;
+    height: 100%;
+    object-fit: cover; */
+}
+
 .product-not-found {
     position: absolute;
     top: 50%;
@@ -36,8 +47,15 @@
     }
 }
 
+@media (max-width: 61.99875em) {
+    .category-header__list {
+        padding-bottom: 0;
+    }
+}
+
 @media (max-width: 29.99875em) {
     .category__items {
         grid-template-columns: repeat(auto-fit,minmax(8.375rem,1fr));
     }
 }
+

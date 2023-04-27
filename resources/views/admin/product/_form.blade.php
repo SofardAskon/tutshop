@@ -78,14 +78,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Размеры</label>
-                    <div class="select2-purple">
-                        <select class="select2" name="sizes[]" multiple="multiple" data-placeholder="Выберите размер" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                            @include('admin.product._sizes')
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label>Родительская категория</label>
                     <select id="category" class="custom-select rounded-0" name="categories[]" multiple>
                         @include('admin.product._categories')

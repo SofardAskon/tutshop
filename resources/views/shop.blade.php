@@ -19,18 +19,6 @@
                                 <div class="filter__close _icon-close"></div>
                             </div>
 
-                            <div class="filter__item item-filter">
-                                <button type="button" data-spoller class="item-filter__title _spoller-active">{{ trans('common.sizes') }}</button>
-                                <div class="item-filter__body">
-                                    @foreach ($sizes as $index => $sizeItem)
-                                        <div class="checkbox">
-                                            <input id="c_{{ $index }}" data-error="Ошибка" class="checkbox__input" type="checkbox" value="{{ $sizeItem->id }}" name="size[]">
-                                            <label for="c_{{ $index }}" class="checkbox__label"><span class="checkbox__text">{{ $sizeItem->name }}</span></label>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                            </div>
                             <div class="filter__item item-filter item-filter_range">
                                 <button type="button" data-spoller class="item-filter__title _spoller-active">{{ trans('common.price') }}</button>
                                 <div class="item-filter__body">
